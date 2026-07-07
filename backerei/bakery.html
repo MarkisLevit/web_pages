@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bäckerei Krummel — Handwerk seit 1962</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7EDD8;
+    --linen: #EFE0C0;
+    --wheat: #D9C49A;
+    --brown: #2A1506;
+    --rye: #3E2108;
+    --amber: #C47B1A;
+    --gold: #E09B30;
+    --warm-white: #FBF5E8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--brown);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(251,245,232,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(42,21,6,0.1);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--brown); text-decoration: none;
+  }
+  .nav-logo span { color: var(--amber); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--rye); text-decoration: none; opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--brown);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 6rem 5rem;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--cream);
+    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-subtitle {
+    margin-top: 2rem; max-width: 380px;
+    font-size: 1rem; line-height: 1.75;
+    color: rgba(247,237,216,0.65);
+    opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .hero-cta {
+    margin-top: 3rem; display: flex; gap: 1rem; align-items: center;
+    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: var(--amber);
+    color: var(--warm-white);
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    border: none; cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+  .btn-ghost {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(247,237,216,0.6); text-decoration: none;
+    border-bottom: 1px solid rgba(247,237,216,0.3);
+    padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--cream); border-color: var(--cream); }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-img-fill {
+    position: absolute; inset: 0;
+    background:
+      url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900&q=80') center/cover no-repeat;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.3s forwards;
+  }
+  .hero-img-fill::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--brown) 0%, transparent 40%);
+  }
+
+  .hero-badge {
+    position: absolute; bottom: 3rem; left: 3rem;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 1px solid rgba(224,155,48,0.4);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 3;
+    opacity: 0; animation: fadeIn 1s 1.2s forwards;
+  }
+  .hero-badge span:first-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; color: var(--gold); line-height: 1;
+  }
+  .hero-badge span:last-child {
+    font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(224,155,48,0.7);
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 5rem; }
+
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.15; color: var(--brown);
+  }
+  .section-title em { font-style: italic; color: var(--amber); }
+  .divider {
+    width: 48px; height: 1px;
+    background: var(--wheat); margin: 2rem 0;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--cream);
+    display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: center;
+  }
+  .about-text p {
+    font-size: 1.05rem; line-height: 1.85; color: var(--rye);
+    opacity: 0.85;
+  }
+  .about-text p + p { margin-top: 1.25rem; }
+  .about-image {
+    position: relative;
+  }
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+  }
+  .about-photo-wrap {
+    position: relative;
+  }
+  .about-photo-wrap::before {
+    content: '';
+    position: absolute;
+    top: -1.5rem; left: -1.5rem;
+    right: 1.5rem; bottom: 1.5rem;
+    border: 1px solid var(--wheat);
+    z-index: 0;
+  }
+  .about-photo-wrap img { position: relative; z-index: 1; }
+
+  /* ── PRODUCTS ── */
+  .products { background: var(--warm-white); }
+  .products-header { text-align: center; max-width: 500px; margin: 0 auto 4rem; }
+  .products-header .divider { margin: 2rem auto; }
+  .products-header p { font-size: 0.95rem; line-height: 1.8; color: var(--rye); opacity: 0.75; }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .product-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 4/5;
+    cursor: pointer;
+  }
+  .product-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    display: block;
+  }
+  .product-card:hover img { transform: scale(1.06); }
+  .product-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(42,21,6,0.88) 0%, transparent 55%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem 1.75rem;
+    transition: background 0.3s;
+  }
+  .product-card:hover .product-overlay {
+    background: linear-gradient(to top, rgba(42,21,6,0.95) 0%, rgba(42,21,6,0.2) 55%);
+  }
+  .product-tag {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400; color: var(--cream); line-height: 1.1;
+  }
+  .product-desc {
+    font-size: 0.8rem; line-height: 1.6; color: rgba(247,237,216,0.65);
+    margin-top: 0.5rem; max-height: 0; overflow: hidden;
+    transition: max-height 0.4s, opacity 0.4s;
+    opacity: 0;
+  }
+  .product-card:hover .product-desc { max-height: 60px; opacity: 1; }
+
+  /* ── HOURS / VISIT ── */
+  .visit {
+    background: var(--brown);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0;
+  }
+  .visit-info {
+    padding: 7rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .visit-info .section-title { color: var(--cream); }
+  .visit-info .section-label { color: var(--gold); }
+  .visit-info .divider { background: rgba(247,237,216,0.2); }
+
+  .hours-list { list-style: none; margin-bottom: 2.5rem; }
+  .hours-list li {
+    display: flex; justify-content: space-between;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(247,237,216,0.08);
+    font-size: 0.9rem; color: rgba(247,237,216,0.7);
+  }
+  .hours-list li strong { color: var(--cream); font-weight: 400; }
+  .hours-list li .time { color: var(--gold); }
+
+  .address-block { margin-bottom: 2rem; }
+  .address-block p {
+    font-size: 0.9rem; line-height: 1.9;
+    color: rgba(247,237,216,0.65);
+  }
+  .address-block a {
+    color: var(--gold); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    border-bottom: 1px solid rgba(224,155,48,0.4);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+  .address-block a:hover { border-color: var(--gold); }
+
+  .visit-map {
+    position: relative; overflow: hidden;
+    background: var(--rye);
+  }
+  .map-frame {
+    width: 100%; height: 100%; min-height: 500px;
+    border: none; display: block;
+    filter: grayscale(0.3) contrast(1.05);
+  }
+  .map-overlay-link {
+    position: absolute; bottom: 2rem; right: 2rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--brown);
+    color: var(--cream); text-decoration: none;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+  }
+  .map-overlay-link:hover { background: var(--amber); }
+  .map-overlay-link svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* ── SPECIALTIES STRIP ── */
+  .strip {
+    background: var(--amber);
+    padding: 1.5rem 5rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .strip-inner {
+    display: inline-flex; gap: 3rem;
+    animation: scroll 22s linear infinite;
+  }
+  .strip-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; font-weight: 300;
+    color: var(--brown); letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+  .strip-dot { color: rgba(42,21,6,0.4); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    background: var(--linen);
+    text-align: center;
+  }
+  .testimonials .section-title { margin-bottom: 0.5rem; }
+  .testimonials .divider { margin: 2rem auto; }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    margin-top: 3rem; text-align: left;
+  }
+  .testi-card {
+    background: var(--warm-white);
+    padding: 2rem; position: relative;
+  }
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300;
+    color: var(--wheat); line-height: 0.8;
+    margin-bottom: 0.75rem;
+  }
+  .testi-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.88rem; line-height: 1.85; font-style: italic;
+    color: var(--rye); opacity: 0.85;
+  }
+  .testi-author {
+    margin-top: 1.25rem; font-size: 0.72rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--amber);
+  }
+  .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 0.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown);
+    padding: 4rem 5rem 3rem;
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem; border-top: 1px solid rgba(247,237,216,0.06);
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem; font-weight: 300; color: var(--cream);
+    margin-bottom: 1rem; display: block;
+  }
+  .footer-logo em { font-style: italic; color: var(--gold); }
+  .footer-tagline {
+    font-size: 0.85rem; line-height: 1.8;
+    color: rgba(247,237,216,0.45); max-width: 260px;
+  }
+  .footer-col h4 {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.25rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a {
+    font-size: 0.85rem; color: rgba(247,237,216,0.55);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--cream); }
+  .footer-col p {
+    font-size: 0.85rem; color: rgba(247,237,216,0.55); line-height: 1.9;
+  }
+  .footer-bottom {
+    grid-column: 1/-1;
+    border-top: 1px solid rgba(247,237,216,0.08);
+    padding-top: 1.5rem; margin-top: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 0.75rem; color: rgba(247,237,216,0.3); letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 7rem 2rem 4rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 2rem; }
+    .products { padding: 4rem 2rem; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 5rem 2rem; }
+    .visit { grid-template-columns: 1fr; }
+    .visit-map { min-height: 350px; }
+    .map-frame { min-height: 350px; }
+    .testi-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 2rem; }
+    .strip { padding: 1.25rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Bäckerei <span>Panitze</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#products">Sortiment</a></li>
+    <li><a href="#visit">Besuchen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Handgemacht · Seit 1962</p>
+    <h1 class="hero-title">
+      Brot,<br>
+      das nach<br>
+      <em>Heimat</em><br>
+      schmeckt.
+    </h1>
+    <p class="hero-subtitle">
+      Jeden Morgen frisch gebacken — mit regionalen Zutaten, traditionellen Rezepten und echter Handwerkskunst.
+    </p>
+    <div class="hero-cta">
+      <a href="#products" class="btn-primary">Unser Sortiment</a>
+      <a href="#visit" class="btn-ghost">Öffnungszeiten →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-fill"></div>
+  </div>
+  <div class="hero-badge">
+    <span>62</span>
+    <span>Jahre</span>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">Sauerteigbrot</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Bayerische Brezeln</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Roggenvollkornbrot</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Butterstreuselkuchen</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Dinkelbrötchen</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Schwarzwälder Kirschtorte</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Laugengebäck</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Hefezopf</span>
+    <span class="strip-dot">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="strip-item">Sauerteigbrot</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Bayerische Brezeln</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Roggenvollkornbrot</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Butterstreuselkuchen</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Dinkelbrötchen</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Schwarzwälder Kirschtorte</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Laugengebäck</span>
+    <span class="strip-dot">·</span>
+    <span class="strip-item">Hefezopf</span>
+    <span class="strip-dot">·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text reveal">
+    <span class="section-label">Unsere Geschichte</span>
+    <h2 class="section-title">Drei Generationen,<br><em>eine Leidenschaft.</em></h2>
+    <div class="divider"></div>
+    <p>
+      Was 1962 mit einem kleinen Ofen und dem unerschütterlichen Glauben an echtes Handwerk begann, ist heute ein fester Bestandteil unseres Viertels. Großvater Hans Krummel legte den Grundstein — seine Rezepte für Roggenbrot und Brezeln werden bis heute täglich gebacken, unverändert und mit derselben Sorgfalt.
+    </p>
+    <p>
+      Wir verwenden ausschließlich regionale Zutaten: Mehl aus der Mühle in Sinzing, Butter vom Bauernhof in Pentling und saisonale Früchte aus der näheren Umgebung. Kein Konservierungsstoff, kein Kompromiss — nur ehrliches Brot.
+    </p>
+    <p>
+      Heute führt die dritte Generation das Handwerk fort. Und jeden Morgen um 3:30 Uhr geht das Licht in unserer Backstube an.
+    </p>
+  </div>
+  <div class="about-image reveal">
+    <div class="about-photo-wrap">
+      <img class="about-photo"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+        alt="Frisch gebackenes Brot" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header reveal">
+    <span class="section-label">Sortiment</span>
+    <h2 class="section-title">Frisch aus<br>dem <em>Ofen</em></h2>
+    <div class="divider"></div>
+    <p>Von goldbraunen Brezeln bis zum saftigen Streuselkuchen — täglich frisch, täglich anders, immer mit Herz gemacht.</p>
+  </div>
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=600&q=80" alt="Sauerteigbrot" loading="lazy">
+      <div class="product-overlay">
+        <p class="product-tag">Brot</p>
+        <h3 class="product-name">Sauerteig­brot</h3>
+        <p class="product-desc">48 Stunden gereift, knusprige Kruste, saftige Krume. Unser Meisterstück.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=600&q=80" alt="Brezeln" loading="lazy">
+      <div class="product-overlay">
+        <p class="product-tag">Gebäck</p>
+        <h3 class="product-name">Laugen­brezeln</h3>
+        <p class="product-desc">Täglich frisch, mit grobem Salz und der perfekten Lauge verfeinert.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&q=80" alt="Kuchen" loading="lazy">
+      <div class="product-overlay">
+        <p class="product-tag">Kuchen & Torten</p>
+        <h3 class="product-name">Streusel­kuchen</h3>
+        <p class="product-desc">Butteriger Hefeteig, hausgemachte Streusel nach Großmutters Rezept.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="Croissant" loading="lazy">
+      <div class="product-overlay">
+        <p class="product-tag">Feingebäck</p>
+        <h3 class="product-name">Butter­croissant</h3>
+        <p class="product-desc">72 Schichten, echte Normandie-Butter, jeden Morgen frisch gebacken.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=600&q=80" alt="Roggenbrot" loading="lazy">
+      <div class="product-overlay">
+        <p class="product-tag">Brot</p>
+        <h3 class="product-name">Roggen­vollkorn</h3>
+        <p class="product-desc">Dicht, kernig, nussig — das Brot für Kenner und treue Stammkunden.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&q=80" alt="Torte" loading="lazy">
+      <div class="product-overlay">
+        <p class="product-tag">Torten</p>
+        <h3 class="product-name">Schwarzwälder Kirsch</h3>
+        <p class="product-desc">Original Rezept, echte Kirschwasser-Sahne, frische Kirschen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT / MAP -->
+<section class="visit" id="visit">
+  <div class="visit-info reveal">
+    <span class="section-label">Besuchen Sie uns</span>
+    <h2 class="section-title" style="color: var(--cream);">Wir freuen uns<br><em>auf Sie.</em></h2>
+    <div class="divider"></div>
+
+    <ul class="hours-list">
+      <li><strong>Montag – Freitag</strong> <span class="time">06:00 – 18:30</span></li>
+      <li><strong>Samstag</strong> <span class="time">06:00 – 17:00</span></li>
+      <li><strong>Sonntag</strong> <span class="time">07:00 – 13:00</span></li>
+      <li><strong>Feiertage</strong> <span class="time">07:30 – 12:00</span></li>
+    </ul>
+
+    <div class="address-block">
+      <p>
+        Bäckerstraße 14<br>
+        93047 Regensburg<br>
+        Tel: <a href="tel:+499411234567">0941 123 45 67</a>
+      </p>
+      <br>
+      <a href="https://maps.app.goo.gl/3oQGcjAHYgQfjAnW8" target="_blank" rel="noopener">
+        Route berechnen →
+      </a>
+    </div>
+  </div>
+
+  <div class="visit-map">
+    <iframe
+      class="map-frame"
+      src="https://maps.app.goo.gl/3oQGcjAHYgQfjAnW8"
+      allowfullscreen loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Kartenansicht Bäckerei Krummel">
+    </iframe>
+    <a href="https://maps.app.goo.gl/3oQGcjAHYgQfjAnW8" target="_blank" rel="noopener" class="map-overlay-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1768.9327804425611!2d14.435729643648575!3d51.17026510781737!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4708ff7f9d8bb3c1%3A0x13145708fb92df5a!2sB%C3%A4ckerei%20und%20Konditorei%20Panitz%20inh.%20Falko%20Panitz!5e0!3m2!1sen!2sua!4v1774033437937!5m2!1sen!2sua"/>
+      </svg>
+      In Google Maps öffnen
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="reveal">
+    <span class="section-label">Kundenstimmen</span>
+    <h2 class="section-title">Was unsere Gäste <em>sagen</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Das beste Sauerteigbrot der Stadt — vielleicht sogar Bayerns. Ich kaufe hier seit über zwanzig Jahren und es schmeckt jedes Mal wie das erste Mal.</p>
+      <p class="testi-author">— Maria K., Stammkundin</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Sonntagmorgens ohne Krummel-Brezeln? Undenkbar. Die ganze Familie schwört seit Jahren auf diese Bäckerei. Freundlich, frisch, fantastisch.</p>
+      <p class="testi-author">— Thomas R., Regensburg</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Die Schwarzwälder Kirschtorte war der Höhepunkt unserer Feier. Alle Gäste waren begeistert. Handwerk auf höchstem Niveau — man schmeckt die Liebe zum Beruf.</p>
+      <p class="testi-author">— Sandra & Markus W.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="footer-logo">Bäckerei <em>Krummel</em></span>
+    <p class="footer-tagline">Handwerk, Tradition und die Liebe zum Brot — seit drei Generationen in Regensburg zu Hause.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Navigation</h4>
+    <ul>
+      <li><a href="#about">Über uns</a></li>
+      <li><a href="#products">Sortiment</a></li>
+      <li><a href="#visit">Öffnungszeiten</a></li>
+      <li><a href="#visit">Kontakt</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Kontakt</h4>
+    <p>Bäckerstraße 14<br>93047 Regensburg<br><br>0941 123 45 67<br>info@baeckerei-krummel.de</p>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Bäckerei Krummel · Alle Rechte vorbehalten</p>
+    <p>Mit ♥ gebacken in Regensburg</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

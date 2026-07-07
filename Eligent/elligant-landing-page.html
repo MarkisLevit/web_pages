@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elligant | Luxury Hair &amp; Beauty Studio</title>
+<meta name="description" content="Elligant is a premium hair and beauty studio offering signature haircuts, luxury colour, bridal styling and spa treatments. Book your appointment today.">
+<meta name="theme-color" content="#1C1815">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231C1815'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-style='italic' font-size='58' fill='%23C6A15B' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===================== Variables ===================== */
+  :root{
+    --charcoal:#1C1815;
+    --charcoal-2:#241F1B;
+    --charcoal-soft:#2E2822;
+    --cream:#FBF6EE;
+    --cream-2:#F3E9D8;
+    --gold:#C6A15B;
+    --gold-light:#E3CFA0;
+    --gold-deep:#96793F;
+    --ink:#2A2420;
+    --ink-soft:#786B60;
+    --cream-soft:#D8CBB8;
+    --shadow-gold: 0 22px 44px -22px rgba(198,161,91,0.5);
+    --shadow-dark: 0 22px 44px -20px rgba(0,0,0,0.45);
+    --header-h: 86px;
+    --ease: cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ===================== Reset ===================== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:var(--header-h);}
+  body{
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.15;color:var(--ink);}
+  section{position:relative;}
+  svg{display:block;}
+  .container{max-width:1240px;margin:0 auto;padding:0 32px;}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
+
+  /* ===================== Utilities ===================== */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Jost',sans-serif;font-size:0.76rem;letter-spacing:0.32em;
+    text-transform:uppercase;color:var(--gold-deep);font-weight:600;
+  }
+  .eyebrow-light{color:var(--gold-light);}
+  .eyebrow::before{content:'';width:22px;height:1px;background:currentColor;display:inline-block;}
+  .section-title{font-size:clamp(2.1rem,3.2vw + 1rem,3.1rem);font-weight:500;margin-top:18px;}
+  .section-title.light{color:var(--cream);}
+  .section-title em{font-style:italic;color:var(--gold);}
+  .flourish{width:110px;height:16px;color:var(--gold);margin:22px 0 0;}
+  .flourish.center{margin-left:auto;margin-right:auto;}
+  .center{text-align:center;}
+  .icon{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  .monogram{
+    position:absolute;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+    line-height:1;pointer-events:none;user-select:none;z-index:0;
+  }
+
+  /* Reveal-on-scroll */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);transition-delay:calc(var(--i,0) * 0.09s);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  /* ===================== Buttons ===================== */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:17px 36px;border-radius:999px;font-family:'Jost',sans-serif;
+    font-size:0.92rem;font-weight:500;letter-spacing:0.04em;
+    transition:all 0.4s var(--ease);white-space:nowrap;cursor:pointer;
+  }
+  .btn-primary{background:var(--gold);color:var(--charcoal);}
+  .btn-primary:hover{background:var(--gold-deep);color:var(--cream);transform:translateY(-3px);box-shadow:var(--shadow-gold);}
+  .btn-ghost{border:1px solid var(--gold-light);color:var(--gold-light);background:transparent;}
+  .btn-ghost:hover{background:var(--gold-light);color:var(--charcoal);transform:translateY(-3px);}
+  .btn-dark{background:var(--charcoal);color:var(--cream);}
+  .btn-dark:hover{background:#000;transform:translateY(-3px);box-shadow:var(--shadow-dark);}
+  .btn-sm{padding:12px 26px;font-size:0.82rem;}
+
+  /* ===================== Header ===================== */
+  .header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    height:var(--header-h);display:flex;align-items:center;
+    background:transparent;border-bottom:1px solid transparent;
+    transition:background 0.4s var(--ease),border-color 0.4s var(--ease),box-shadow 0.4s var(--ease);
+  }
+  .header.is-scrolled{
+    background:rgba(28,24,21,0.92);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border-bottom-color:rgba(198,161,91,0.18);
+    box-shadow:0 10px 30px -18px rgba(0,0,0,0.6);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;width:100%;}
+  .logo{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;
+    font-size:1.9rem;letter-spacing:0.03em;color:var(--cream);
+  }
+  .nav-links{display:flex;align-items:center;gap:44px;}
+  .nav-link{
+    position:relative;font-size:0.92rem;letter-spacing:0.03em;color:var(--cream-soft);
+    padding:6px 0;transition:color 0.3s var(--ease);
+  }
+  .nav-link::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);
+    transition:width 0.35s var(--ease);
+  }
+  .nav-link:hover{color:var(--gold-light);}
+  .nav-link:hover::after{width:100%;}
+  .header-actions{display:flex;align-items:center;gap:22px;}
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:22px;}
+  .nav-toggle span{display:block;height:2px;width:100%;background:var(--cream);border-radius:2px;transition:all 0.3s var(--ease);}
+  .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.active span:nth-child(2){opacity:0;}
+  .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ===================== Hero ===================== */
+  .hero{
+    min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;text-align:center;padding:calc(var(--header-h) + 40px) 0 100px;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(198,161,91,0.22), transparent 42%),
+      radial-gradient(circle at 10% 90%, rgba(198,161,91,0.12), transparent 40%),
+      linear-gradient(160deg, var(--charcoal) 0%, var(--charcoal-2) 55%, #14110E 100%);
+  }
+  .monogram-hero{
+    right:-2%;bottom:-8%;font-size:clamp(220px,32vw,460px);color:rgba(198,161,91,0.07);
+    -webkit-text-stroke:1px rgba(198,161,91,0.22);
+  }
+  .hero-inner{position:relative;z-index:2;max-width:780px;margin:0 auto;padding:0 24px;}
+  .hero-inner .eyebrow{justify-content:center;opacity:0;animation:fadeUp 0.9s var(--ease) 0.15s forwards;}
+  .hero-title{
+    font-size:clamp(2.9rem,5.2vw + 1rem,5.4rem);color:var(--cream);margin-top:22px;
+    opacity:0;animation:fadeUp 0.9s var(--ease) 0.32s forwards;
+  }
+  .hero-title em{font-style:italic;color:var(--gold);}
+  .hero-subtitle{
+    font-size:clamp(1rem,1.1vw + 0.6rem,1.18rem);color:var(--cream-soft);max-width:560px;
+    margin:26px auto 0;font-weight:300;
+    opacity:0;animation:fadeUp 0.9s var(--ease) 0.5s forwards;
+  }
+  .hero-actions{
+    display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:42px;
+    opacity:0;animation:fadeUp 0.9s var(--ease) 0.68s forwards;
+  }
+  .scroll-cue{
+    position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;
+    width:1px;height:52px;background:linear-gradient(var(--gold), transparent);
+  }
+  .scroll-cue span{
+    position:absolute;top:0;left:-2.5px;width:6px;height:6px;border-radius:50%;background:var(--gold);
+    animation:floatDown 2.2s ease-in-out infinite;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes floatDown{0%{top:0;opacity:0;}30%{opacity:1;}100%{top:44px;opacity:0;}}
+
+  /* ===================== About ===================== */
+  .about{padding:150px 0;background:var(--cream);}
+  .about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:90px;align-items:center;}
+  .about-visual{position:relative;}
+  .about-visual::before{
+    content:'';position:absolute;top:-18px;left:-18px;width:100%;height:100%;
+    border:1.5px solid var(--gold);border-radius:4px;z-index:0;
+  }
+  .about-panel{
+    position:relative;z-index:1;aspect-ratio:4/5;border-radius:4px;overflow:hidden;
+    background:linear-gradient(150deg,#2E2822 0%,#5C4A30 48%,var(--gold) 100%);
+    display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-dark);
+  }
+  .monogram-panel{
+    position:relative;font-size:clamp(120px,17vw,210px);color:rgba(251,246,238,0.06);
+    -webkit-text-stroke:1px rgba(251,246,238,0.32);
+  }
+  .about-content .about-text{margin-top:22px;color:var(--ink-soft);font-size:1.03rem;max-width:520px;}
+  .feature-trio{display:flex;flex-direction:column;gap:26px;margin-top:44px;}
+  .feature-item{display:flex;gap:20px;align-items:flex-start;padding-top:26px;border-top:1px solid rgba(42,36,32,0.1);}
+  .feature-item:first-child{border-top:none;padding-top:0;}
+  .feature-icon{
+    width:46px;height:46px;flex-shrink:0;border-radius:50%;border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold-deep);
+  }
+  .feature-item h3{font-size:1.2rem;font-weight:500;margin-bottom:4px;}
+  .feature-item p{color:var(--ink-soft);font-size:0.95rem;}
+
+  /* ===================== Services ===================== */
+  .services{padding:150px 0;background:var(--cream-2);}
+  .section-head{max-width:640px;margin:0 auto;}
+  .section-intro{margin-top:20px;color:var(--ink-soft);font-size:1.02rem;}
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:72px;
+  }
+  .service-card{
+    background:var(--cream);border:1px solid rgba(42,36,32,0.08);border-radius:6px;
+    padding:42px 32px;transition:transform 0.45s var(--ease),box-shadow 0.45s var(--ease),border-color 0.45s var(--ease);
+  }
+  .service-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-gold);border-color:var(--gold);}
+  .service-icon-wrap{
+    width:56px;height:56px;border-radius:50%;border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--ink);
+    transition:color 0.4s var(--ease),background 0.4s var(--ease);
+  }
+  .service-card:hover .service-icon-wrap{color:var(--gold);background:rgba(198,161,91,0.08);}
+  .service-card h3{font-size:1.4rem;font-weight:500;margin-top:26px;}
+  .service-card p{color:var(--ink-soft);font-size:0.95rem;margin-top:12px;}
+  .service-price{
+    display:inline-block;margin-top:20px;font-family:'Jost',sans-serif;font-size:0.82rem;
+    letter-spacing:0.06em;color:var(--gold-deep);font-weight:600;text-transform:uppercase;
+  }
+  .services-footnote{margin-top:48px;text-align:center;color:var(--ink-soft);font-size:0.86rem;font-style:italic;}
+
+  /* ===================== CTA Banner ===================== */
+  .cta-banner{background:linear-gradient(120deg,var(--gold-light),var(--gold));padding:90px 0;}
+  .cta-inner{text-align:center;max-width:620px;margin:0 auto;}
+  .cta-inner h2{font-size:clamp(1.9rem,3vw + 1rem,2.7rem);color:var(--charcoal);}
+  .cta-inner p{margin-top:16px;color:var(--charcoal-2);font-size:1.02rem;}
+  .cta-inner .btn{margin-top:34px;}
+
+  /* ===================== Contact ===================== */
+  .contact{background:var(--charcoal);padding:150px 0;overflow:hidden;}
+  .monogram-contact{
+    left:-4%;top:8%;font-size:clamp(180px,26vw,360px);color:rgba(198,161,91,0.05);
+    -webkit-text-stroke:1px rgba(198,161,91,0.14);
+  }
+  .contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;}
+  .contact-list{margin-top:38px;display:flex;flex-direction:column;gap:26px;}
+  .contact-list li{display:flex;gap:18px;align-items:flex-start;}
+  .contact-list .icon{color:var(--gold);margin-top:3px;}
+  .contact-list h4{
+    font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--cream-soft);font-weight:500;margin-bottom:4px;
+  }
+  .contact-list p,.contact-list a{color:var(--cream);font-size:1rem;}
+  .contact-list a:hover{color:var(--gold-light);}
+  .contact-info .btn{margin-top:40px;}
+  .hours-card{
+    background:var(--charcoal-soft);border:1px solid rgba(198,161,91,0.25);border-radius:6px;
+    padding:44px 40px;
+  }
+  .icon-lg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.2;}
+  .hours-card h3{color:var(--cream);font-size:1.5rem;margin-top:18px;}
+  .hours-list{margin-top:26px;}
+  .hours-list li{
+    display:flex;justify-content:space-between;padding:14px 0;
+    border-bottom:1px solid rgba(198,161,91,0.15);color:var(--cream-soft);font-size:0.96rem;
+  }
+  .hours-list li:last-child{border-bottom:none;}
+  .hours-list li span:last-child{color:var(--cream);font-weight:500;}
+  .hours-note{margin-top:22px;color:var(--cream-soft);font-size:0.86rem;line-height:1.7;}
+
+  /* ===================== Footer ===================== */
+  .footer{background:var(--charcoal-2);padding:90px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:50px;padding-bottom:70px;}
+  .footer-logo{font-size:1.9rem;color:var(--cream);}
+  .footer-blurb{margin-top:16px;color:var(--cream-soft);font-size:0.93rem;max-width:280px;}
+  .social-links{display:flex;gap:14px;margin-top:26px;}
+  .social-links a{
+    width:38px;height:38px;border-radius:50%;border:1px solid rgba(198,161,91,0.35);
+    display:flex;align-items:center;justify-content:center;color:var(--gold-light);
+    transition:all 0.35s var(--ease);
+  }
+  .social-links a:hover{background:var(--gold);border-color:var(--gold);color:var(--charcoal);transform:translateY(-3px);}
+  .social-links svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.4;}
+  .footer-col h4{
+    font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--gold-light);font-weight:600;margin-bottom:22px;
+  }
+  .footer-col ul{display:flex;flex-direction:column;gap:13px;}
+  .footer-col a,.footer-col li{color:var(--cream-soft);font-size:0.93rem;transition:color 0.3s var(--ease);}
+  .footer-col a:hover{color:var(--gold-light);}
+  .footer-bottom{border-top:1px solid rgba(198,161,91,0.14);padding:28px 0;}
+  .footer-bottom-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .footer-bottom p{color:var(--cream-soft);font-size:0.85rem;}
+  .footer-bottom a{color:var(--gold-light);font-size:0.85rem;}
+  .footer-bottom a:hover{color:var(--gold);}
+
+  /* ===================== Skip link ===================== */
+  .skip-link{
+    position:absolute;left:-9999px;top:0;background:var(--gold);color:var(--charcoal);
+    padding:14px 22px;z-index:2000;border-radius:0 0 6px 0;font-size:0.9rem;font-weight:500;
+  }
+  .skip-link:focus{left:0;}
+
+  /* ===================== Responsive ===================== */
+  @media (max-width:1024px){
+    .about-grid{grid-template-columns:1fr;gap:60px;}
+    .about-visual{max-width:420px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;gap:60px;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:40px 30px;}
+  }
+  @media (max-width:900px){
+    .nav-toggle{display:flex;}
+    .nav-links{
+      flex-direction:column;align-items:flex-start;gap:0;padding:10px 32px 26px;
+    }
+    .nav-links li{width:100%;}
+    .nav-link{display:block;padding:14px 0;width:100%;}
+    .nav{
+      position:fixed;top:var(--header-h);left:0;right:0;background:var(--charcoal);
+      max-height:0;overflow:hidden;transition:max-height 0.45s var(--ease);
+      border-bottom:1px solid rgba(198,161,91,0.15);
+    }
+    .nav.open{max-height:420px;}
+    .header-book{display:none;}
+    .nav-links .nav-book{display:block;margin-top:14px;}
+    .nav-links .nav-book .btn{width:100%;}
+  }
+  @media (min-width:901px){
+    .nav-book{display:none;}
+  }
+  @media (max-width:768px){
+    .about,.services,.contact{padding:100px 0;}
+    .services-grid{grid-template-columns:1fr;}
+    .cta-banner{padding:70px 0;}
+  }
+  @media (max-width:560px){
+    .container{padding:0 22px;}
+    .hero-actions{flex-direction:column;width:100%;}
+    .hero-actions .btn{width:100%;}
+    .footer-grid{grid-template-columns:1fr;gap:36px;}
+    .footer-bottom-inner{flex-direction:column;align-items:flex-start;}
+  }
+
+  /* ===================== Reduced motion ===================== */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
+    .reveal{opacity:1;transform:none;}
+    .hero-inner .eyebrow,.hero-title,.hero-subtitle,.hero-actions{opacity:1;animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- ===================== Header ===================== -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#home" class="logo">Elligant</a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li class="nav-book">
+          <a href="https://home.shortcutssoftware.com/elligant#/_h/sites/70027/details" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Book Now</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://home.shortcutssoftware.com/elligant#/_h/sites/70027/details" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm header-book">Book Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ===================== Hero ===================== -->
+  <section class="hero" id="home">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <span class="monogram monogram-hero" aria-hidden="true">E</span>
+
+    <div class="hero-inner">
+      <p class="eyebrow eyebrow-light">Luxury Hair &amp; Beauty Studio</p>
+      <h1 class="hero-title">Experience True <em>Elegance</em></h1>
+      <p class="hero-subtitle">Step into Elligant, where master stylists, premium products, and unhurried care come together for a beauty experience as refined as you are.</p>
+      <div class="hero-actions">
+        <a href="https://home.shortcutssoftware.com/elligant#/_h/sites/70027/details" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book Your Appointment</a>
+        <a href="#services" class="btn btn-ghost">Explore Our Services</a>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll to About section"><span></span></a>
+  </section>
+
+  <!-- ===================== About ===================== -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+
+      <div class="about-visual reveal">
+        <div class="about-panel">
+          <span class="monogram monogram-panel" aria-hidden="true">E</span>
+        </div>
+      </div>
+
+      <div class="about-content reveal">
+        <p class="eyebrow">Welcome to Elligant</p>
+        <h2 class="section-title">Where Beauty Meets Intention</h2>
+        <svg class="flourish" viewBox="0 0 200 20" aria-hidden="true"><path d="M0 10 Q 50 -4 100 10 T 200 10" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="100" cy="10" r="3" fill="currentColor"/></svg>
+
+        <p class="about-text">At Elligant, beauty is never rushed. Every visit begins with a conversation, not a checklist — because the right cut, colour, or treatment starts with genuinely understanding you: your lifestyle, your features, and the look you're chasing.</p>
+        <p class="about-text">Our studio was built as a retreat as much as a salon: soft light, considered scent, and a pace that lets you exhale. It's where technical precision meets total relaxation, so you leave looking, and feeling, entirely like yourself — only elevated.</p>
+
+        <div class="feature-trio">
+          <div class="feature-item">
+            <span class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 9L8 4H16L20 9L12 21L4 9Z"/><path d="M4 9H20"/><path d="M9 9L12 21L15 9"/><path d="M8 4L9 9"/><path d="M16 4L15 9"/></svg></span>
+            <div>
+              <h3>Master Stylists</h3>
+              <p>Trained in the latest global techniques and refreshed every season.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M10 2H14V5L16 8V20C16 21.1 15.1 22 14 22H10C8.9 22 8 21.1 8 20V8L10 5V2Z"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+            <div>
+              <h3>Premium Products</h3>
+              <p>We work exclusively with luxury, salon-grade formulas on every service.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M20 14.5C18.7 15.4 17.1 16 15.4 16C10.8 16 7 12.2 7 7.6C7 5.9 7.6 4.3 8.5 3C4.9 4.2 2.3 7.6 2.3 11.6C2.3 16.6 6.4 20.7 11.4 20.7C15.4 20.7 18.8 18.1 20 14.5Z"/></svg></span>
+            <div>
+              <h3>Tranquil Atmosphere</h3>
+              <p>A calm, considered space designed for total unwinding, not just styling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== Services ===================== -->
+  <section class="services" id="services">
+    <div class="container">
+
+      <div class="section-head center reveal">
+        <p class="eyebrow center" style="justify-content:center;">Our Signature Services</p>
+        <h2 class="section-title">Crafted For You</h2>
+        <svg class="flourish center" viewBox="0 0 200 20" aria-hidden="true"><path d="M0 10 Q 50 -4 100 10 T 200 10" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="100" cy="10" r="3" fill="currentColor"/></svg>
+        <p class="section-intro">A considered menu, from everyday polish to once-in-a-lifetime occasions. Every service is tailored in consultation before we begin.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal" style="--i:0">
+          <span class="service-icon-wrap"><svg class="icon" viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="2.4"/><circle cx="6.5" cy="17.5" r="2.4"/><line x1="8.5" y1="8" x2="20" y2="19"/><line x1="8.5" y1="16" x2="20" y2="5"/></svg></span>
+          <h3>Signature Haircuts</h3>
+          <p>A precision cut tailored to your face shape, texture, and lifestyle, finished with a professional blowout.</p>
+          <span class="service-price">From $75</span>
+        </article>
+
+        <article class="service-card reveal" style="--i:1">
+          <span class="service-icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3C12 3 6 10 6 14.5C6 17.5 8.7 20 12 20C15.3 20 18 17.5 18 14.5C18 10 12 3 12 3Z"/></svg></span>
+          <h3>Luxury Colour</h3>
+          <p>Full colour, balayage, and hand-painted highlights using gentle, glossing, ammonia-light formulas.</p>
+          <span class="service-price">From $140</span>
+        </article>
+
+        <article class="service-card reveal" style="--i:2">
+          <span class="service-icon-wrap"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="6" r="2.1"/><circle cx="17" cy="9.5" r="2.1"/><circle cx="15" cy="16" r="2.1"/><circle cx="9" cy="16" r="2.1"/><circle cx="7" cy="9.5" r="2.1"/></svg></span>
+          <h3>Bridal Styling</h3>
+          <p>Trial runs and wedding-day styling for the bride and her party, in-studio or on location.</p>
+          <span class="service-price">From $180</span>
+        </article>
+
+        <article class="service-card reveal" style="--i:3">
+          <span class="service-icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M4 20C4 20 4 4 20 4C20 4 20 20 4 20Z"/><path d="M4 20L16 8"/></svg></span>
+          <h3>Premium Spa Treatments</h3>
+          <p>Restorative facials and scalp rituals designed to melt away tension and restore natural glow.</p>
+          <span class="service-price">From $95</span>
+        </article>
+
+        <article class="service-card reveal" style="--i:4">
+          <span class="service-icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M3 8H15A3 3 0 1 0 12 5"/><path d="M3 12H18A3 3 0 1 1 15 15"/><path d="M3 16H10"/></svg></span>
+          <h3>Blowout &amp; Styling</h3>
+          <p>Salon-fresh volume, sleek finishes, or soft waves for date night, events, or everyday polish.</p>
+          <span class="service-price">From $55</span>
+        </article>
+
+        <article class="service-card reveal" style="--i:5">
+          <span class="service-icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3L13.8 9.2L20 11L13.8 12.8L12 19L10.2 12.8L4 11L10.2 9.2Z"/></svg></span>
+          <h3>Nail Artistry</h3>
+          <p>Manicures and pedicures finished with long-wear, glass-like polish and precise shaping.</p>
+          <span class="service-price">From $50</span>
+        </article>
+
+      </div>
+
+      <p class="services-footnote reveal">Prices shown are starting rates and vary by stylist and length. Final pricing is confirmed at booking.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CTA Banner ===================== -->
+  <section class="cta-banner">
+    <div class="container cta-inner reveal">
+      <h2>Ready to Feel Elligant?</h2>
+      <p>Reserve your chair today and let our stylists take it from there.</p>
+      <a href="https://home.shortcutssoftware.com/elligant#/_h/sites/70027/details" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Book Now</a>
+    </div>
+  </section>
+
+  <!-- ===================== Contact ===================== -->
+  <section class="contact" id="contact">
+    <span class="monogram monogram-contact" aria-hidden="true">E</span>
+    <div class="container contact-grid">
+
+      <div class="contact-info reveal">
+        <p class="eyebrow eyebrow-light">Get In Touch</p>
+        <h2 class="section-title light">Visit Us</h2>
+        <svg class="flourish" viewBox="0 0 200 20" aria-hidden="true"><path d="M0 10 Q 50 -4 100 10 T 200 10" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="100" cy="10" r="3" fill="currentColor"/></svg>
+
+        <ul class="contact-list">
+          <li>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21C12 21 19 14.5 19 9.5C19 5.4 15.6 2 12 2C8.4 2 5 5.4 5 9.5C5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <div>
+              <h4>Address</h4>
+              <p>123 Elegance Avenue, Suite 200<br>Beverly Hills, CA 90210</p>
+            </div>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M6 3L9 3L10.5 7L8 9C9 12 12 15 15 16L17 13.5L21 15V18C21 19.7 19.7 21 18 21C10 20.5 3.5 14 3 6C3 4.3 4.3 3 6 3Z"/></svg>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:+15551234567">(555) 123-4567</a></p>
+            </div>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7L12 13L21 7"/></svg>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:hello@elligantsalon.com">hello@elligantsalon.com</a></p>
+            </div>
+          </li>
+        </ul>
+
+        <a href="https://home.shortcutssoftware.com/elligant#/_h/sites/70027/details" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book Appointment</a>
+      </div>
+
+      <div class="contact-hours reveal" style="--i:1">
+        <div class="hours-card">
+          <svg class="icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7V12L15.5 14"/></svg>
+          <h3>Opening Hours</h3>
+          <ul class="hours-list">
+            <li><span>Monday – Friday</span><span>9:00 AM – 7:00 PM</span></li>
+            <li><span>Saturday</span><span>9:00 AM – 6:00 PM</span></li>
+            <li><span>Sunday</span><span>11:00 AM – 4:00 PM</span></li>
+          </ul>
+          <p class="hours-note">Walk-ins welcome, subject to availability. We recommend booking ahead for weekend appointments.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== Footer ===================== -->
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div class="footer-brand">
+      <p class="logo footer-logo">Elligant</p>
+      <p class="footer-blurb">A premium hair and beauty studio dedicated to elevated, unhurried care.</p>
+      <div class="social-links">
+        <a href="#" aria-label="Elligant on Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1"/></svg></a>
+        <a href="#" aria-label="Elligant on Facebook"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14 8H12.5C11.7 8 11 8.7 11 9.5V12H14L13.6 15H11V21"/></svg></a>
+        <a href="#" aria-label="Elligant on X"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="8" y1="8" x2="16" y2="16"/><line x1="16" y1="8" x2="8" y2="16"/></svg></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Signature Haircuts</li>
+        <li>Luxury Colour</li>
+        <li>Bridal Styling</li>
+        <li>Premium Spa Treatments</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li>(555) 123-4567</li>
+        <li>hello@elligantsalon.com</li>
+        <li>123 Elegance Avenue<br>Beverly Hills, CA 90210</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <span id="year"></span> Elligant. All rights reserved.</p>
+      <a href="https://home.shortcutssoftware.com/elligant#/_h/sites/70027/details" target="_blank" rel="noopener noreferrer">Book an Appointment</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Header scroll state
+  const header = document.getElementById('header');
+  const onScroll = () => {
+    if (window.scrollY > 40) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Smooth scroll + close mobile menu on link click
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      nav.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Scroll-reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+</script>
+
+</body>
+</html>
