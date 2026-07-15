@@ -29,11 +29,14 @@ The main page (`bakery_panitz (1).html`) includes:
 
 - **Hero section** with bakery photos
 - **About / Geschichte** section
-- **Product grid** with category filter (Brot, Konditorei, Café)
+- **Product grid** with category filter (Kuchen & Torten, Feingebäck, Brot & Brötchen)
 - **Features strip** — Regional wheat, Night baking, Master craft, Cosy café, Free WiFi, Air conditioning
 - **Photo gallery**
-- **Opening hours** — Mon–Sat 05:00–16:00, Sun closed
+- **Opening hours** — two blocks:
+  - *Currently valid (until Oct 2026, construction):* Mon–Fri 05:00–13:00, Sat & Sun closed
+  - *Regular hours (resume after October, shown dimmed/struck-through):* Mon–Sat 05:00–16:00, Sun closed
 - **Contact section** — Phone `03591 / 601065` (clickable), Email `baeckerei.panitz@googlemail.com`
+- **Google Maps embed** (`#karte`) in the contact area with a "Route planen" button
 - **Construction site alert banner** — shown Mon–Fri 05:00–13:00 until October 2026 (dismissible)
 - **Pre-order form** (`#vorbestellung`) with anti-spam:
   - Honeypot hidden field
