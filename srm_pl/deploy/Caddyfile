@@ -1,0 +1,105 @@
+# ---------------------------------------------------------------------------
+# Solid Rock Mission Polska — Caddy site configuration
+#
+# Installed to /etc/caddy/Caddyfile by deploy/server-setup.sh, which substitutes
+# __DOMAIN__, __ACME_EMAIL__ and __PHP_SOCK__ with your real values.
+#
+# TLS certificates are obtained and renewed automatically — no certbot, no cron.
+# ---------------------------------------------------------------------------
+
+{
+	email __ACME_EMAIL__
+}
+
+# One canonical host: www redirects to the bare domain.
+www.__DOMAIN__ {
+	redir https://__DOMAIN__{uri} permanent
+}
+
+__DOMAIN__ {
+	root * /var/www/srm
+	encode zstd gzip
+
+	# ------------------------------------------------------------- headers --
+	header {
+		-Server
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+		# Pages use style="..." attributes, hence 'unsafe-inline' for styles.
+		# Scripts are external files only, so script-src stays strict.
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+	}
+
+	# --------------------------------------------------------------- cache --
+	# Font filenames never change in place, so they can be cached indefinitely.
+	@fonts path /assets/fonts/*
+	header @fonts Cache-Control "public, max-age=31536000, immutable"
+
+	@img path /assets/img/*
+	header @img Cache-Control "public, max-age=2592000"
+
+	@cssjs path /assets/css/* /assets/js/*
+	header @cssjs Cache-Control "public, max-age=86400"
+
+	@html path *.html /
+	header @html Cache-Control "public, max-age=300, must-revalidate"
+
+	# ------------------------------------------------------------ hardening --
+	# Deliberately NOT matching /.* — that would also block
+	# /.well-known/acme-challenge/ and stop Let's Encrypt from issuing certs.
+	@blocked path /.git* /.env* /deploy/* /*.md /*.sh /*.toml /*.conf /*.log
+	handle @blocked {
+		error 404
+	}
+
+	# ----------------------------------------------------------- form relay --
+	# PHP runs for /api only; everything else is served as static files.
+	handle /api/* {
+		php_fastcgi unix/__PHP_SOCK__ {
+			# No index fallback: only explicit .php files here may execute.
+			index off
+		}
+	}
+
+	# ---------------------------------------------------------- static site --
+	# These three handle blocks are mutually exclusive and evaluated in the
+	# order written. Inside this block, redir runs before try_files/file_server
+	# by Caddy's directive ordering, so the legacy paths resolve correctly.
+	handle {
+		# Keeps links already shared on Facebook, Instagram and in newsletters
+		# alive after the move off Tilda.
+		redir /kids                     /programy.html permanent
+		redir /projects                 /projekty.html permanent
+		redir /missionaries             /zespol.html   permanent
+		redir /leadershipteam           /zespol.html   permanent
+		redir /give                     /wsparcie.html permanent
+		redir /contactus                /kontakt.html  permanent
+		redir /humanitarianaidtoukraine /projekty.html permanent
+		redir /ua                       /              permanent
+
+		# Lets /programy resolve as well as the explicit /programy.html.
+		try_files {path} {path}.html {path}/
+		file_server
+	}
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+
+	# Access logs go to stderr, which systemd captures into the journal. Read them
+	# with: journalctl -u caddy
+	#
+	# Deliberately NOT logging to a file. Caddy treats an unopenable log as a
+	# fatal config error and refuses to start at all, so a file log turns a
+	# permissions problem into a completely dead site. The journal has no such
+	# failure mode and handles its own rotation and size limits.
+	log {
+		output stderr
+		format console
+	}
+}

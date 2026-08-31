@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://markislevit.online/</loc>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://markislevit.online/"/>
+  </url>
+  <url>
+    <loc>https://markislevit.online/en/</loc>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://markislevit.online/"/>
+  </url>
+
+  <url>
+    <loc>https://markislevit.online/programy.html</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/programy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/programs.html"/>
+  </url>
+  <url>
+    <loc>https://markislevit.online/en/programs.html</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/programy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/programs.html"/>
+  </url>
+
+  <url>
+    <loc>https://markislevit.online/projekty.html</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/projekty.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/projects.html"/>
+  </url>
+  <url>
+    <loc>https://markislevit.online/en/projects.html</loc>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/projekty.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/projects.html"/>
+  </url>
+
+  <url>
+    <loc>https://markislevit.online/zespol.html</loc>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/zespol.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/team.html"/>
+  </url>
+  <url>
+    <loc>https://markislevit.online/en/team.html</loc>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/zespol.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/team.html"/>
+  </url>
+
+  <url>
+    <loc>https://markislevit.online/wsparcie.html</loc>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/wsparcie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/give.html"/>
+  </url>
+  <url>
+    <loc>https://markislevit.online/en/give.html</loc>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/wsparcie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/give.html"/>
+  </url>
+
+  <url>
+    <loc>https://markislevit.online/kontakt.html</loc>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/contact.html"/>
+  </url>
+  <url>
+    <loc>https://markislevit.online/en/contact.html</loc>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://markislevit.online/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://markislevit.online/en/contact.html"/>
+  </url>
+
+</urlset>

@@ -1,0 +1,9 @@
+# Server address and credentials — never commit
+deploy/deploy.conf
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp

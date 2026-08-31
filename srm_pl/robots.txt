@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dziekujemy.html
+Disallow: /en/thank-you.html
+
+Sitemap: https://markislevit.online/sitemap.xml
