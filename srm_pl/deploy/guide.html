@@ -739,6 +739,19 @@ notepad deploy/deploy.conf</pre>
 
       <p>Always do a dry run first. It shows exactly what would change without touching anything:</p>
 
+      <div class="warn">
+        <div class="warn__t">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 9v5M12 17.5v.01"/><path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+          Git Bash, not PowerShell
+        </div>
+        <p>
+          In PowerShell, <code>bash</code> is the <strong>WSL</strong> launcher, not Git Bash —
+          the script fails with <code>execvpe(/bin/bash) failed</code> before it starts. Run the
+          commands below in Git Bash, or use the PowerShell wrapper
+          <code>.\deploy\deploy.ps1 --dry-run</code>, which finds Git Bash for you.
+        </p>
+      </div>
+
       <div class="cmd">
         <div class="cmd__bar"><span class="where where--local">Your PC</span> Preview</div>
 <pre>bash deploy/deploy.sh --dry-run</pre>
@@ -912,6 +925,14 @@ dpkg-reconfigure --priority=low unattended-upgrades</pre>
             <tr>
               <td>Deploy says <em>“Unit cannot be reloaded because it is inactive”</em></td>
               <td>Not a deploy problem — Caddy is already dead from an earlier error. Your files uploaded fine. Run <code>journalctl -u caddy -n 30</code>, fix what it names, <code>systemctl restart caddy</code>.</td>
+            </tr>
+            <tr>
+              <td><code>execvpe(/bin/bash) failed</code>, or a <code>wsl.conf</code> warning</td>
+              <td>You ran the script from <strong>PowerShell</strong>, where <code>bash</code> means <code>C:\Windows\System32\bash.exe</code> — the WSL launcher, not Git Bash. If WSL is missing or broken it fails before the script even starts. Either open Git Bash and run it there, or from PowerShell use the wrapper: <code>.\deploy\deploy.ps1 --dry-run</code>.</td>
+            </tr>
+            <tr>
+              <td><code>Permission denied (publickey,password)</code></td>
+              <td>SSH reached the server but couldn't authenticate. You have no SSH key, so it wants the root password — and a non-interactive shell can't supply one. Set up a key once (Step&nbsp;2) and the deploy runs without prompting.</td>
             </tr>
             <tr>
               <td>Contact form shows a 502 error</td>

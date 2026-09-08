@@ -34,13 +34,18 @@ DRY=0
 EXCLUDES=(
   ".git" ".gitignore" ".vscode" ".DS_Store" "Thumbs.db"
   "deploy" "README.md" "*.md" "deploy.conf"
+  # Source material, not site content. Voice notes and raw recordings must never
+  # be pushed to the web root — anything uploaded there is publicly downloadable.
+  "*.ogg" "*.oga" "*.m4a" "*.wav" "audio_*"
 )
 
 SSH="ssh -p ${VPS_PORT}"
 TARGET="${VPS_USER}@${VPS_HOST}"
 
 say "Target: ${TARGET}:${VPS_PATH}  (port ${VPS_PORT})"
-$SSH "$TARGET" true 2>/dev/null || die "Cannot reach ${TARGET} over SSH. Check the host, port and your key."
+# No pre-flight probe: it only costs an extra authentication round-trip.
+# Any connection problem surfaces on the first real command, with SSH's own
+# error message intact rather than swallowed by a redirect.
 
 cd "$ROOT"
 
@@ -69,25 +74,35 @@ else
 fi
 
 if [[ $DRY -eq 0 ]]; then
-  say "Fixing ownership and permissions"
-  $SSH "$TARGET" "set -e
-    chown -R caddy:caddy '$VPS_PATH'
-    find '$VPS_PATH' -type d -exec chmod 755 {} +
-    find '$VPS_PATH' -type f -exec chmod 644 {} +"
+  say "Setting permissions, reloading Caddy and verifying"
 
-  # reload only works on a running service; if Caddy is stopped (or died on a
-  # previous bad config) fall back to a full start rather than failing the deploy.
-  say "Reloading Caddy"
-  $SSH "$TARGET" "systemctl reload caddy 2>/dev/null || systemctl restart caddy"
-  if ! $SSH "$TARGET" "systemctl is-active --quiet caddy"; then
-    echo
-    $SSH "$TARGET" "journalctl -u caddy -n 20 --no-pager"
-    die "Files uploaded, but Caddy is not running. See the log above."
-  fi
+  # Everything below runs in a single SSH session on purpose: with password
+  # authentication, one connection means one prompt instead of six.
+  $SSH "$TARGET" "bash -s" <<REMOTE
+set -e
+chown -R caddy:caddy '$VPS_PATH'
+find '$VPS_PATH' -type d -exec chmod 755 {} +
+find '$VPS_PATH' -type f -exec chmod 644 {} +
 
-  say "Done. Verifying:"
-  for path in / /en/ /programy.html /assets/css/main.css; do
-    code=$($SSH "$TARGET" "curl -s -o /dev/null -w '%{http_code}' -H 'Host: \${HOSTNAME}' http://127.0.0.1${path}" 2>/dev/null || echo "---")
-    printf '    %s  %s\n' "$code" "$path"
-  done
+# reload only works on a running service; if Caddy died on an earlier bad
+# config, start it rather than failing the whole deploy.
+systemctl reload caddy 2>/dev/null || systemctl restart caddy
+sleep 2
+
+if ! systemctl is-active --quiet caddy; then
+  echo
+  echo "[!] Caddy is not running. Files uploaded, but the site is down:"
+  journalctl -u caddy -n 20 --no-pager
+  exit 1
+fi
+
+echo
+echo "  Caddy: active"
+for path in / /en/ /co-robimy.html /assets/css/main.css; do
+  code=\$(curl -s -o /dev/null -w '%{http_code}' -H "Host: ${VPS_HOST}" "http://127.0.0.1\${path}")
+  printf '  %s  %s\n' "\$code" "\$path"
+done
+REMOTE
+
+  say "Deployed."
 fi

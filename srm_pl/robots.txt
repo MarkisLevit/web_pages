@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /dziekujemy.html
 Disallow: /en/thank-you.html
+Disallow: /api/
 
 Sitemap: https://markislevit.online/sitemap.xml

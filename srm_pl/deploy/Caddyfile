@@ -70,16 +70,22 @@ __DOMAIN__ {
 	# order written. Inside this block, redir runs before try_files/file_server
 	# by Caddy's directive ordering, so the legacy paths resolve correctly.
 	handle {
-		# Keeps links already shared on Facebook, Instagram and in newsletters
-		# alive after the move off Tilda.
-		redir /kids                     /programy.html permanent
-		redir /projects                 /projekty.html permanent
-		redir /missionaries             /zespol.html   permanent
-		redir /leadershipteam           /zespol.html   permanent
-		redir /give                     /wsparcie.html permanent
-		redir /contactus                /kontakt.html  permanent
-		redir /humanitarianaidtoukraine /projekty.html permanent
-		redir /ua                       /              permanent
+		# Legacy Tilda paths, plus the first version of this site, so links already
+		# shared on Telegram, Facebook and Instagram keep resolving.
+		redir /kids                     /co-robimy.html permanent
+		redir /projects                 /co-robimy.html permanent
+		redir /missionaries             /o-nas.html     permanent
+		redir /leadershipteam           /o-nas.html     permanent
+		redir /give                     /wsparcie.html  permanent
+		redir /contactus                /kontakt.html   permanent
+		redir /humanitarianaidtoukraine /wsparcie.html  permanent
+		redir /ua                       /               permanent
+		redir /programy.html            /co-robimy.html permanent
+		redir /projekty.html            /co-robimy.html permanent
+		redir /zespol.html              /o-nas.html     permanent
+		redir /en/programs.html         /en/what-we-do.html permanent
+		redir /en/projects.html         /en/what-we-do.html permanent
+		redir /en/team.html             /en/about.html  permanent
 
 		# Lets /programy resolve as well as the explicit /programy.html.
 		try_files {path} {path}.html {path}/

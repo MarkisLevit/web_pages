@@ -1,8 +1,10 @@
-# Solid Rock Mission Polska — website
+# Solid Rock Polska — website
 
-Bilingual (PL/EN) static site for the Poland branch of [Solid Rock Mission](https://solidrockmission.org),
-based in Rzeszów. Rebuilt from the original Tilda site with the same brand recognition —
-slate / sand / coral palette, Isaiah 61:1 framing, impact counters, missionary support links.
+Bilingual (PL/EN) static site for **Solid Rock Polska** — the community and foundation in
+Rzeszów, and the Polish part of the international Solid Rock mission.
+
+Built as a Polish site in its own right, not a translation of the American one. Content and
+photography come from the community's own [Telegram channel](https://t.me/SolidRockRzeszow).
 
 No build step. No dependencies. No third-party requests at runtime.
 
@@ -12,73 +14,74 @@ No build step. No dependencies. No third-party requests at runtime.
 
 ```
 srm_pl/
-├── index.html            PL homepage          ├── en/index.html      EN homepage
-├── programy.html         Programs             ├── en/programs.html
-├── projekty.html         Projects             ├── en/projects.html
-├── zespol.html           Team                 ├── en/team.html
-├── wsparcie.html         Give                 ├── en/give.html
+├── index.html            Home                 ├── en/index.html       Home
+├── o-nas.html            About                ├── en/about.html
+├── co-robimy.html        What we do           ├── en/what-we-do.html
+├── wsparcie.html         Support              ├── en/give.html
 ├── kontakt.html          Contact              ├── en/contact.html
 ├── dziekujemy.html       Form thank-you       ├── en/thank-you.html
 ├── 404.html              Bilingual not-found
 ├── sitemap.xml · robots.txt
 ├── api/contact.php       Contact-form handler (the only server-side code)
 ├── assets/
-│   ├── css/main.css      Design system + all components (~35 KB)
-│   ├── js/main.js        Nav, scroll reveal, counters, clipboard (~7 KB)
-│   ├── fonts/            Jost + Manrope, self-hosted woff2 (83 KB)
-│   └── img/              39 WebP files, responsive sizes (2.5 MB total)
+│   ├── css/main.css      Design system + all components (~26 KB)
+│   ├── js/main.js        Nav, reveal, counters, clipboard, next-Sunday date
+│   ├── fonts/            Newsreader + Figtree, self-hosted woff2 (121 KB)
+│   └── img/              27 WebP files from the Telegram channel (~780 KB)
 └── deploy/               VPS setup, Caddyfile, deploy scripts — not uploaded
 ```
 
-Polish is the default language at the root; English lives under `/en/`. Each page carries
-`hreflang` tags pointing at its counterpart, so Google indexes both and shared links land
-in the right language.
+Polish is the default at the root; English lives under `/en/`. Every page carries `hreflang`
+tags pointing at its counterpart. Five pages per language, down from six — the site is
+deliberately lighter than the first version.
 
 ---
 
-## Design system
+## Design
 
-Colours are lifted from the original site so the two feel like one organisation.
+A complete redesign, sharing nothing with the previous American-facing version.
 
 | Token | Value | Use |
 |---|---|---|
-| `--ink-900 / 800 / 700` | `#111315` `#1a2026` `#232b33` | Dark sections, hero, footer, body text |
-| `--sand-50 / 200 / 300` | `#faf8f6` `#e1d9d5` `#c4bdb8` | Alternating light sections |
-| `--coral` / `--coral-dk` | `#f69178` / `#d4674a` | Primary CTAs, accents, eyebrow text |
-| `--gold` | `#f5c662` | Reserved highlight |
+| `--pine-500` / `--pine-700` / `--pine-900` | `#2C5545` `#1E3D31` `#12291F` | Primary. Buttons, CTA bands, footer |
+| `--gold-500` / `--gold-600` | `#D89B34` `#A8741F` | Accent, used sparingly — never as a surface |
+| `--ink` / `--paper` | `#16211D` `#FBFAF7` | Green-black text on warm paper |
 
-Type: **Jost** for display (closest free match to the original's Geometria), **Manrope** for body.
-Both self-hosted with `latin` + `latin-ext` subsets so Polish diacritics render correctly.
+Type: **Newsreader** (serif) for display, **Figtree** for body and UI. Both self-hosted with
+`latin` + `latin-ext` so Polish diacritics render correctly and no visitor IP reaches Google.
 
-Everything scales fluidly with `clamp()` — there are no fixed breakpoints in the type scale.
+The homepage leads with a **split hero** rather than a full-bleed photo, and a **schedule
+strip** — the single most useful thing the site can tell a visitor is when they can turn up.
+
+---
+
+## Two kinds of statistics, kept apart
+
+This matters and is deliberate. The site shows:
+
+- **Solid Rock Polska since 2025** — small, honest, verifiable numbers (started 2025,
+  two weekly gatherings, three free programmes in 2026, zero cost to attend).
+- **The whole Solid Rock mission since 2012** — 20 371 children, 67+ towns, 350+ volunteers,
+  10 010+ Christmas gifts, on a visually distinct pine section, with a footnote saying the
+  figures cover every country the mission works in.
+
+Do not merge these. The Polish foundation has not reached 20 371 children, and presenting
+the mission's record as its own would be false.
 
 ---
 
 ## Deployment
 
-Target is a **Hostinger VPS running Caddy**. Full walkthrough in
-[deploy/DEPLOY.md](deploy/DEPLOY.md); the short version:
+Unchanged from before — Hostinger VPS running Caddy. Full walkthrough in
+[deploy/DEPLOY.md](deploy/DEPLOY.md) and the [visual guide](deploy/guide.html).
 
 ```bash
-# once, on the server
-scp deploy/server-setup.sh deploy/Caddyfile root@YOUR_VPS_IP:/root/
-ssh root@YOUR_VPS_IP "bash /root/server-setup.sh"
-
-# once, locally
-bash deploy/set-domain.sh yourdomain.pl
-cp deploy/deploy.conf.example deploy/deploy.conf   # then set VPS_HOST
-
-# every time after that
-bash deploy/deploy.sh
+bash deploy/deploy.sh --dry-run   # preview
+bash deploy/deploy.sh             # publish
 ```
 
-| File | Role |
-|---|---|
-| `deploy/server-setup.sh` | One-time bootstrap: Caddy, PHP-FPM, firewall, SMTP credentials |
-| `deploy/Caddyfile` | Site config — auto-HTTPS, caching, security headers, legacy redirects |
-| `deploy/deploy.sh` | `rsync --delete` upload, with a tar-over-SSH fallback for Windows |
-| `deploy/set-domain.sh` | Rewrites the hardcoded domain in all 105 places |
-| `api/contact.php` | Contact-form handler — the only executable file on the server |
+`deploy/Caddyfile` redirects the legacy Tilda paths *and* the first version's URLs
+(`/programy.html`, `/zespol.html`, `/en/team.html`, …) so nothing already shared breaks.
 
 Local preview (static pages only; the form needs PHP):
 ```
@@ -87,56 +90,48 @@ python -m http.server 8000
 
 ---
 
-## Before going live
+## Before this is finished
 
-These need a human decision or real data — they are marked in the code, not silently faked.
+1. **Photographs of children.** `dzieci-*.webp` and several gallery images show identifiable
+   minors. Under Polish law (RODO plus image rights, art. 81 pr. aut.) publishing these needs
+   guardian consent. They came from your own public channel, so consent may already exist via
+   camp registration — please confirm before this goes live, or swap them for photos where
+   children are not identifiable.
 
-1. **Domain.** Every canonical URL, `hreflang` and `og:url` assumes `https://solidrockmission.pl`.
-   Run `bash deploy/set-domain.sh yourdomain.pl` — it rewrites all 105 references and
-   verifies none are left behind.
+2. **Foundation registration.** The site says "Fundacja w trakcie rejestracji" in the footer
+   and about page, and the PLN/BLIK card says *coming soon* rather than showing an invented
+   account number. Add the KRS and NIP once you have them; the giving page's tax paragraph
+   will need rewriting at the same time.
 
-2. **PLN payments.** `wsparcie.html` / `en/give.html` have a "Przelew i BLIK" card that
-   currently shows a *Coming soon* notice instead of an account number. Wire up
-   Przelewy24, PayU or Stripe and replace the notice — do not invent an IBAN.
+3. **A Polish phone number.** The contact page carries a clearly-marked placeholder. The old
+   US and Ukrainian numbers were removed — they were no use to a visitor in Rzeszów.
 
-3. **Tax deductibility.** Both give pages state plainly that a gift to a US 501(c)(3) is
-   **not** deductible on a Polish tax return, and offer to route donors through a partner
-   church or foundation. Confirm that this is how you want it worded; it is a legal claim.
+4. **The "three organisations" block.** It names USA, Ukraine and Poland, following the voice
+   brief ("we have an American organisation, a Ukrainian organisation and a Polish one"). If
+   you want Ukraine dropped entirely, it's the `orgs_block` section on the home and about pages.
 
-4. **SMTP credentials.** The contact form relays through an authenticated SMTP server.
-   `server-setup.sh` prompts for the details and writes them to `/etc/srm/smtp.conf`
-   on the VPS (mode `0640`, outside the web root). A Gmail App Password is the quickest
-   start; see [deploy/DEPLOY.md §5](deploy/DEPLOY.md). Nothing secret lives in this repo.
-
-5. **Missing portraits.** Six team members render as initials on a sand gradient
-   (`.person__photo--placeholder`): Mark Kyzliuk, Karina Zhavoronkova, Olya Zhavoronkova,
-   Alex & Anna Zakharov, Olesya Andrienko, and the Ukraine leadership pairs. Drop a square
-   photo into `assets/img/` and swap the placeholder `<div>` for an `<img>` to fill them in.
-
-6. **2024–2025 impact numbers.** The chart on the programs pages ends at 2023 — that is
-   where the source site's data stops. Add the newer bars when you have the figures.
+5. **Team list.** Four people are named on the about page. Add or correct as needed — there
+   are no portraits, by design, to keep the page light.
 
 ---
 
 ## Editing notes
 
-- **Header and footer are duplicated per page.** That is the cost of having no build step.
-  Change one, change all twelve — grep for the block you are editing.
-- **Images** are pre-generated at several widths (`-640`, `-1000`, `-1600`). Adding a new
-  photo means generating the sizes and writing the `srcset` by hand.
+- **Header and footer are duplicated per page** — the cost of having no build step. Change
+  one, change all twelve.
 - **Counters** animate from `data-count` and format via `Intl.NumberFormat` using the page's
-  `lang`, so `20371` renders as `20 371` in Polish and `20,371` in English automatically.
-- **Scroll reveal** is opt-in per element via `class="reveal"` plus optional `data-delay="1..4"`.
-  Everything degrades to visible if JavaScript is off or `prefers-reduced-motion` is set.
+  `lang`, so `20371` renders `20 371` in Polish and `20,371` in English automatically.
+- **`data-next-sunday`** fills in the date of the coming Sunday, so the schedule reads as an
+  invitation rather than an opening hour.
+- **Reveal on scroll** is opt-in per element: `class="rv"` plus optional `data-d="1..3"`.
+  Everything degrades to visible without JS or under `prefers-reduced-motion`.
 
 ---
 
 ## Accessibility & privacy
 
 - Skip link, visible focus rings, `aria-current` on the active nav item, labelled form fields.
-- The bar chart carries a full `role="img"` + `aria-label` description of every data point.
-- All motion respects `prefers-reduced-motion`.
+- All motion respects `prefers-reduced-motion`; the three theme states (light, dark, and the
+  unstamped system default) are defined as complete token sets.
 - **No Google Fonts, no analytics, no external calls.** Fonts are self-hosted specifically so
-  visitor IPs are never sent to a third party — the Google Fonts CDN has been ruled a GDPR/RODO
-  problem in EU case law. Adding analytics later would require a cookie banner; there is none
-  now because nothing is tracked.
+  visitor IPs never reach a third party. There is no cookie banner because nothing is tracked.
