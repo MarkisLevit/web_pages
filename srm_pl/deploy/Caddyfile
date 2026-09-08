@@ -48,6 +48,12 @@ __DOMAIN__ {
 	@html path *.html /
 	header @html Cache-Control "public, max-age=300, must-revalidate"
 
+	# The news digest is meant to change between deploys, so it gets the same
+	# short, revalidated lifetime as the pages themselves rather than the
+	# month-long asset default.
+	@data path /assets/data/*
+	header @data Cache-Control "public, max-age=300, must-revalidate"
+
 	# ------------------------------------------------------------ hardening --
 	# Deliberately NOT matching /.* — that would also block
 	# /.well-known/acme-challenge/ and stop Let's Encrypt from issuing certs.

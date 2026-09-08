@@ -1,0 +1,239 @@
+{
+  "channel": "https://t.me/SolidRockRzeszow",
+  "updated": "2026-09-08",
+  "imageBase": "assets/img/news/",
+  "place": {
+    "pl": "Al. Gen. Władysława Sikorskiego 114, Rzeszów",
+    "en": "Al. Gen. Władysława Sikorskiego 114, Rzeszów"
+  },
+  "rhythm": [
+    {
+      "weekday": 0,
+      "time": "11:00",
+      "pl": {
+        "name": "Nabożeństwo",
+        "note": "Uwielbienie, Słowo i wspólna modlitwa. W tym czasie dla dzieci działa szkółka niedzielna."
+      },
+      "en": {
+        "name": "Sunday service",
+        "note": "Worship, teaching and prayer together. Sunday school runs for the children at the same time."
+      }
+    },
+    {
+      "weekday": 0,
+      "time": "16:00",
+      "pl": {
+        "name": "Klub młodzieżowy",
+        "note": "Spotkanie dla nastolatków — rozmowa, gry i muzyka."
+      },
+      "en": {
+        "name": "Youth club",
+        "note": "For teenagers — conversation, games and music."
+      }
+    },
+    {
+      "weekday": 3,
+      "time": "18:00",
+      "pl": {
+        "name": "Grupa domowa",
+        "note": "Mniejsze grono, wspólne czytanie Biblii i modlitwa."
+      },
+      "en": {
+        "name": "Home group",
+        "note": "A smaller circle, reading the Bible together and praying."
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "2026-09-12-festiwal-nadziei",
+      "date": "2026-09-12",
+      "dateEnd": "2026-09-13",
+      "kind": "planned",
+      "link": "https://t.me/SolidRockRzeszow/535",
+      "where": {
+        "pl": "Rynek w Rzeszowie",
+        "en": "The Rynek, Rzeszów"
+      },
+      "hours": {
+        "pl": "sobota 11:00–21:45 · niedziela 12:00–21:45",
+        "en": "Saturday 11:00–21:45 · Sunday 12:00–21:45"
+      },
+      "photos": [
+        {
+          "src": "festiwal-nadziei",
+          "w": 515,
+          "h": 732,
+          "pl": "Plakat Festiwalu Nadziei: muzycy na scenie, daty 12–13 września, Rzeszów Rynek",
+          "en": "Festival of Hope poster: musicians on stage, 12–13 September, Rzeszów Rynek"
+        }
+      ],
+      "pl": {
+        "title": "Festiwal Nadziei na rzeszowskim Rynku",
+        "lead": "12–13 września Rynek zamienia się w scenę: muzyka, historie ludzi i modlitwa. Wstęp wolny, bez zapisów.",
+        "body": [
+          "To dwa pełne dni na głównym placu miasta — koncerty, świadectwa i modlitwa o uzdrowienie, a obok osobna przestrzeń z zajęciami dla dzieci.",
+          "Wydarzenie odbywa się pod hasłem „Kocham Rzeszów”. Nie trzeba się zapisywać ani nic płacić: można wpaść na godzinę albo zostać do wieczora."
+        ],
+        "facts": [
+          "Sobota 11:00–21:45",
+          "Niedziela 12:00–21:45",
+          "Wstęp wolny, bez zapisów",
+          "Zajęcia dla dzieci",
+          "Mówcy z zagranicy"
+        ]
+      },
+      "en": {
+        "title": "Festival of Hope on the Rzeszów market square",
+        "lead": "On 12–13 September the Rynek turns into a stage: music, people’s stories and prayer. Free entry, no sign-up.",
+        "body": [
+          "Two full days on the city’s main square — concerts, personal stories and prayer for healing, with a separate space of activities for children alongside it.",
+          "The event runs under the banner “Kocham Rzeszów” (I love Rzeszów). Nothing to book and nothing to pay: come for an hour or stay until the evening."
+        ],
+        "facts": [
+          "Saturday 11:00–21:45",
+          "Sunday 12:00–21:45",
+          "Free entry, no sign-up",
+          "Activities for children",
+          "International speakers"
+        ]
+      }
+    },
+    {
+      "id": "2026-08-30-chrzest",
+      "date": "2026-08-30",
+      "kind": "past",
+      "link": "https://t.me/SolidRockRzeszow/524",
+      "where": {
+        "pl": "Sikorskiego 114, Rzeszów",
+        "en": "Sikorskiego 114, Rzeszów"
+      },
+      "photos": [
+        {
+          "src": "chrzest-1",
+          "w": 600,
+          "h": 800,
+          "pl": "Grupa osób w białych strojach stoi razem w ogrodzie po chrzcie",
+          "en": "A group dressed in white standing together in the garden after the baptism"
+        },
+        {
+          "src": "chrzest-2",
+          "w": 450,
+          "h": 800,
+          "pl": "Cztery osoby z pamiątkowymi dyplomami i kwiatami",
+          "en": "Four people holding commemorative certificates and flowers"
+        },
+        {
+          "src": "chrzest-3",
+          "w": 450,
+          "h": 800,
+          "pl": "Mężczyzna przemawia przy stole w ogrodzie podczas uroczystości",
+          "en": "A man speaking beside a table in the garden during the service"
+        }
+      ],
+      "pl": {
+        "title": "Chrzest wodny — „nowe życie, nowa strona”",
+        "lead": "30 sierpnia o 11:00 przy Sikorskiego 114 kolejne osoby wyznały wiarę i przyjęły chrzest.",
+        "body": [
+          "Zaproszenie na ten dzień niosło słowa z Ewangelii Marka: „Kto uwierzy i ochrzci się, będzie zbawiony” (Mk 16,16).",
+          "Zdjęcia i nagrania z uroczystości podpisaliśmy zdaniem, które najlepiej ją streszcza: „Bo wy wszyscy, którzy zostaliście ochrzczeni w Chrystusie, przyoblekliście się w Chrystusa” (Ga 3,27)."
+        ],
+        "facts": []
+      },
+      "en": {
+        "title": "Water baptism — “new life, a new page”",
+        "lead": "On 30 August at 11:00, at Sikorskiego 114, more people professed their faith and were baptised.",
+        "body": [
+          "The invitation to the day carried words from Mark’s gospel: “Whoever believes and is baptised will be saved” (Mark 16:16).",
+          "We captioned the photos and clips from the service with the sentence that sums it up best: “For all of you who were baptised into Christ have clothed yourselves with Christ” (Galatians 3:27)."
+        ],
+        "facts": []
+      }
+    },
+    {
+      "id": "2026-08-23-dim-fest",
+      "date": "2026-08-23",
+      "kind": "past",
+      "link": "https://t.me/SolidRockRzeszow/521",
+      "photos": [],
+      "pl": {
+        "title": "Misja Solid Rock na DIM FEST 2026",
+        "lead": "Cała misja włączyła się w DIM FEST 2026 — inicjatywę charytatywną na rzecz dzieci.",
+        "body": [
+          "Relację z udziału misji udostępniliśmy na naszym kanale."
+        ],
+        "facts": []
+      },
+      "en": {
+        "title": "Solid Rock Mission at DIM FEST 2026",
+        "lead": "The wider mission joined DIM FEST 2026, a charity initiative for children.",
+        "body": [
+          "We shared the coverage of the mission’s part in it on our channel."
+        ],
+        "facts": []
+      }
+    },
+    {
+      "id": "2026-08-16-niedziela",
+      "date": "2026-08-16",
+      "kind": "past",
+      "link": "https://t.me/SolidRockRzeszow/513",
+      "photos": [
+        {
+          "src": "niedziela-0816-2",
+          "w": 800,
+          "h": 600,
+          "pl": "Sala podczas niedzielnego nabożeństwa, ludzie siedzą zwróceni w stronę mówcy",
+          "en": "The room during the Sunday service, people seated facing the speaker"
+        },
+        {
+          "src": "niedziela-0816-1",
+          "w": 599,
+          "h": 800,
+          "pl": "Mężczyzna z mikrofonem mówi przy drewnianym krzyżu",
+          "en": "A man with a microphone speaking beside the wooden cross"
+        },
+        {
+          "src": "niedziela-0816-3",
+          "w": 600,
+          "h": 800,
+          "pl": "Zgromadzeni podczas nabożeństwa, widok od tyłu sali",
+          "en": "The gathering during the service, seen from the back of the room"
+        }
+      ],
+      "pl": {
+        "title": "Zwykła niedziela, 16 sierpnia",
+        "lead": "Kilka kadrów ze zwykłego niedzielnego zgromadzenia — takiego, na jakie można przyjść bez zapowiedzi.",
+        "body": [
+          "Do zdjęć dopisaliśmy wtedy jedno zdanie: błogosławieństwo dla wszystkich, którzy tym razem nie mogli być z nami."
+        ],
+        "facts": []
+      },
+      "en": {
+        "title": "An ordinary Sunday, 16 August",
+        "lead": "A few frames from an ordinary Sunday gathering — the kind you can walk into unannounced.",
+        "body": [
+          "We added one line to the photos at the time: a blessing for everyone who could not be with us that day."
+        ],
+        "facts": []
+      }
+    },
+    {
+      "id": "polkolonie-terminy",
+      "kind": "note",
+      "photos": [],
+      "pl": {
+        "title": "Terminy półkolonii — zawsze najpierw na Telegramie",
+        "lead": "Najbliższe turnusy bezpłatnych półkolonii dla dzieci 6–13 lat ogłaszamy z kilkutygodniowym wyprzedzeniem na kanale.",
+        "body": [],
+        "facts": []
+      },
+      "en": {
+        "title": "Camp dates go to Telegram first",
+        "lead": "Dates for the next free day camps for children aged 6–13 are announced on the channel a few weeks ahead.",
+        "body": [],
+        "facts": []
+      }
+    }
+  ]
+}

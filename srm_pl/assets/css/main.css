@@ -61,6 +61,9 @@
   --highlight-text:var(--gold-600);
   --shadow-sm:0 1px 2px rgba(18,41,31,.05), 0 3px 10px rgba(18,41,31,.045);
   --shadow-md:0 2px 6px rgba(18,41,31,.06), 0 14px 34px rgba(18,41,31,.09);
+  /* The header mark ships as a near-white PNG for dark backgrounds; knock it
+     to black on the light paper, and leave it untouched in dark mode. */
+  --logo-filter:brightness(0);
 
   /* type */
   --serif:'Newsreader', Georgia, 'Times New Roman', serif;
@@ -102,6 +105,7 @@
     --highlight-text:#E9C381;
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
     --shadow-md:0 2px 6px rgba(0,0,0,.3), 0 14px 34px rgba(0,0,0,.35);
+    --logo-filter:none;
   }
 }
 :root[data-theme="dark"] {
@@ -120,6 +124,7 @@
   --highlight-text:#E9C381;
   --shadow-sm:0 1px 2px rgba(0,0,0,.3);
   --shadow-md:0 2px 6px rgba(0,0,0,.3), 0 14px 34px rgba(0,0,0,.35);
+  --logo-filter:none;
 }
 
 /* ---------- Reset -------------------------------------------------------- */
@@ -150,7 +155,11 @@ p + p{margin-top:1.15rem}
 .wrap{width:min(100% - var(--gutter) * 2,var(--wrap));margin-inline:auto}
 .narrow{width:min(100% - var(--gutter) * 2,var(--narrow));margin-inline:auto}
 .section{padding-block:var(--section)}
-.section--tight{padding-block:clamp(2.75rem,2.2rem + 2.6vw,4.75rem)}
+.section--tight{
+  padding-block:clamp(2.75rem,2.2rem + 2.6vw,4.75rem);
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
 .section--tint{background:var(--surface-2)}
 .section--pine{background:var(--pine-700);color:var(--text-invert)}
 .section--pine p{color:rgba(244,248,245,.8)}
@@ -223,7 +232,7 @@ p + p{margin-top:1.15rem}
 .hdr__in{display:flex;align-items:center;gap:1.1rem;min-height:72px}
 
 .brand{display:flex;align-items:center;gap:.65rem;margin-right:auto;flex:none}
-.brand img{width:40px;height:auto}
+.brand img{width:40px;height:auto;filter:var(--logo-filter)}
 .brand b{
   display:block;font-family:var(--serif);font-weight:600;font-size:1.06rem;
   letter-spacing:-.01em;line-height:1.1;color:var(--text);
@@ -242,7 +251,9 @@ p + p{margin-top:1.15rem}
   color:var(--text-muted);transition:color .16s,background-color .16s;white-space:nowrap;
 }
 .nav a:hover{color:var(--text);background:var(--surface-2)}
-.nav a[aria-current="page"]{color:var(--accent-text);font-weight:700}
+/* :not(.btn) — the drawer's Wesprzyj/Support button carries aria-current on
+   its own page and must keep the button's own colours. */
+.nav a[aria-current="page"]:not(.btn){color:var(--accent-text);font-weight:700}
 
 .hdr__act{display:flex;align-items:center;gap:.55rem;flex:none}
 .lang{display:flex;border:1px solid var(--rule);border-radius:100px;overflow:hidden}
@@ -319,6 +330,153 @@ p + p{margin-top:1.15rem}
 .when__where a{color:var(--gold-200);border-bottom:1px solid rgba(245,227,194,.4)}
 .when__where a:hover{border-bottom-color:var(--gold-200)}
 
+/* ---------- News digest -------------------------------------------------- */
+/* Two columns: the weekly rhythm with real computed dates on the left, the
+   channel digest on the right. Both are rendered from assets/data/news.json. */
+.news__grid{display:grid;gap:2.4rem}
+@media (min-width:900px){
+  .news__grid{grid-template-columns:minmax(0,19rem) minmax(0,1fr);gap:clamp(2.2rem,1.4rem + 2.4vw,3.6rem)}
+}
+.news__kicker{
+  font-size:.7rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:1.15rem;
+}
+.news__fallback{color:var(--text-muted);font-size:.95rem}
+.news__fallback a{color:var(--accent-text);border-bottom:1px solid var(--rule)}
+.news__foot{
+  display:flex;flex-wrap:wrap;align-items:center;gap:1rem;justify-content:space-between;
+  margin-top:2.2rem;padding-top:1.2rem;border-top:1px solid var(--rule-soft);
+  font-size:.83rem;color:var(--text-muted);
+}
+.news__foot-acts{display:flex;flex-wrap:wrap;gap:.6rem}
+
+.rhythm{list-style:none;padding:0;margin:0}
+.rhythm__item{padding:1.05rem 0;border-top:1px solid var(--rule-soft)}
+.rhythm__item:first-child{border-top:0;padding-top:0}
+.rhythm__when{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.rhythm__day{
+  font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--text-muted);
+}
+.rhythm__item--soon .rhythm__day{color:var(--highlight-text)}
+.rhythm__time{font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--accent-text)}
+.rhythm__name{font-family:var(--serif);font-size:1.14rem;font-weight:600;margin-top:.2rem}
+.rhythm__note{font-size:.87rem;color:var(--text-muted);line-height:1.5;margin-top:.25rem}
+.rhythm__where{
+  margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid var(--rule-soft);
+  font-size:.83rem;color:var(--text-muted);line-height:1.5;
+}
+
+.feed{list-style:none;padding:0;margin:0;display:grid;gap:.85rem}
+.feed__item{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.15rem;align-items:start;
+  background:var(--surface);border:1px solid var(--rule-soft);border-radius:var(--r);
+  padding:1.2rem 1.35rem;transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+}
+.feed__item:hover{border-color:var(--rule);box-shadow:var(--shadow-sm)}
+.feed__when{
+  flex:none;width:3.1rem;text-align:center;padding:.45rem .2rem;border-radius:10px;
+  background:var(--surface-2);line-height:1.1;
+}
+.feed__when b{display:block;font-family:var(--serif);font-size:1.32rem;font-weight:600;color:var(--text)}
+.feed__when span{
+  display:block;margin-top:.15rem;font-size:.66rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-muted);
+}
+.feed__item--photo{grid-template-columns:auto minmax(0,1fr) auto}
+.feed__thumb{width:5.5rem;border-radius:10px;overflow:hidden;background:var(--surface-3);flex:none}
+.feed__thumb img{width:100%;height:100%;aspect-ratio:1;object-fit:cover}
+@media (max-width:620px){
+  .feed__item--photo{grid-template-columns:auto minmax(0,1fr)}
+  .feed__thumb{display:none}
+}
+.feed__item--note{grid-template-columns:minmax(0,1fr);background:var(--surface-2);border-color:transparent}
+.feed__item--note .feed__body h3{margin-top:.5rem}
+.feed__body h3{font-size:1.06rem;margin-top:.55rem}
+.feed__body p{font-size:.91rem;color:var(--text-muted);margin-top:.35rem}
+.feed__body .arrow{margin-top:.7rem}
+@media (max-width:430px){
+  .feed__item{grid-template-columns:1fr;gap:.85rem}
+  .feed__when{width:auto;display:flex;align-items:baseline;gap:.4rem;justify-self:start;padding:.3rem .6rem}
+  .feed__when b{font-size:1.05rem}
+  .feed__when span{margin-top:0}
+}
+
+/* ---------- Blog --------------------------------------------------------- */
+/* Posts render from the same news.json as the digest. Two columns once there is
+   room; the newest entry with a picture leads with a wider image. */
+.posts{display:grid;gap:clamp(2.4rem,1.8rem + 2.2vw,4rem)}
+.post{display:grid;gap:clamp(1.3rem,1rem + 1.2vw,2.2rem);align-items:start}
+@media (min-width:820px){
+  .post{grid-template-columns:minmax(0,17rem) minmax(0,1fr);gap:clamp(1.8rem,1.2rem + 2vw,3.2rem)}
+  .post--lead{grid-template-columns:minmax(0,23rem) minmax(0,1fr)}
+  .post--text{grid-template-columns:minmax(0,1fr)}
+}
+.post + .post{border-top:1px solid var(--rule-soft);padding-top:clamp(2.4rem,1.8rem + 2.2vw,4rem)}
+
+.post__shot{margin:0;border-radius:var(--r-lg);overflow:hidden;background:var(--surface-3)}
+.post__shot img{width:100%;height:auto;display:block}
+.post__thumbs{display:flex;gap:.55rem;margin-top:.55rem;flex-wrap:wrap}
+.post__thumb{
+  width:4.6rem;padding:0;border:0;border-radius:10px;overflow:hidden;cursor:zoom-in;
+  background:var(--surface-3);line-height:0;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease);
+}
+.post__thumb:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.post__thumb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.post__thumb img{width:100%;height:100%;aspect-ratio:1;object-fit:cover}
+
+.post__meta{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.post__date{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.post__title{font-size:var(--s-2);margin-top:.7rem;line-height:1.2}
+.post__lead{font-size:1.02rem;color:var(--text);margin-top:.7rem}
+.post__body > p{margin-top:.85rem;color:var(--text-muted);font-size:.95rem}
+.post__body > p.post__lead{color:var(--text)}
+.post__where{
+  display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;margin-top:1rem;
+  font-size:.87rem;color:var(--accent-text);font-weight:600;
+}
+.post__where-place::before{content:"◆ ";color:var(--highlight)}
+.post__facts{
+  list-style:none;padding:0;margin-top:1.1rem;display:flex;flex-wrap:wrap;gap:.45rem;
+}
+.post__facts li{
+  font-size:.79rem;font-weight:600;padding:.32rem .7rem;border-radius:100px;
+  background:var(--surface-2);color:var(--text-muted);
+}
+.post__link{margin-top:1.2rem}
+
+/* ---------- Lightbox ----------------------------------------------------- */
+.lb{
+  border:0;padding:0;background:transparent;max-width:min(94vw,1000px);max-height:94vh;
+  color:#fff;overflow:visible;
+}
+.lb::backdrop{background:rgba(10,16,13,.88)}
+.lb__img{
+  display:block;max-width:100%;max-height:78vh;width:auto;height:auto;margin:0 auto;
+  border-radius:var(--r);background:#0d130f;
+}
+.lb__cap{
+  margin-top:.9rem;text-align:center;font-size:.85rem;line-height:1.5;
+  color:rgba(255,255,255,.82);max-width:60ch;margin-inline:auto;
+}
+.lb__x,.lb__nav{
+  position:absolute;z-index:1;border:0;cursor:pointer;color:#fff;
+  background:rgba(0,0,0,.45);border-radius:100px;line-height:1;
+  transition:background-color .16s var(--ease);
+}
+.lb__x:hover,.lb__nav:hover{background:rgba(0,0,0,.75)}
+.lb__x:focus-visible,.lb__nav:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.lb__x{top:-.4rem;right:-.4rem;width:2.4rem;height:2.4rem;font-size:1.6rem}
+.lb__nav{top:38vh;width:2.8rem;height:2.8rem;font-size:1.9rem}
+.lb__nav--prev{left:-.5rem}
+.lb__nav--next{right:-.5rem}
+@media (max-width:600px){
+  .lb__nav{top:auto;bottom:-.6rem}
+  .lb__nav--prev{left:25%}
+  .lb__nav--next{right:25%}
+}
+
 /* ---------- Cards -------------------------------------------------------- */
 .grid{display:grid;gap:var(--gap)}
 .grid--2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
@@ -370,10 +528,12 @@ p + p{margin-top:1.15rem}
   font-size:clamp(2rem,1.5rem + 2.2vw,3rem);line-height:1;letter-spacing:-.03em;
   color:var(--text);font-variant-numeric:tabular-nums;
 }
+.stat b span{font:inherit;letter-spacing:inherit;color:inherit}
 .stat b .plus{color:var(--highlight)}
-.stat span{display:block;margin-top:.5rem;font-size:.87rem;color:var(--text-muted);line-height:1.45}
+/* Label only: the counter spans live inside <b> and must keep the display size. */
+.stat > span{display:block;margin-top:.5rem;font-size:.87rem;color:var(--text-muted);line-height:1.45}
 .section--pine .stat b{color:#fff}
-.section--pine .stat span{color:rgba(244,248,245,.7)}
+.section--pine .stat > span{color:rgba(244,248,245,.7)}
 
 .stat-note{
   margin-top:1.6rem;font-size:.83rem;color:var(--text-muted);
@@ -391,7 +551,11 @@ p + p{margin-top:1.15rem}
 .org--here{border-color:var(--pine-500);box-shadow:0 0 0 3px var(--pine-100)}
 .org__flag{font-size:1.5rem;line-height:1}
 .org h3{font-size:1.12rem}
-.org p{font-size:.92rem;color:var(--text-muted);flex:1}
+.org p{font-size:.92rem;color:var(--text-muted)}
+/* Only the unclassed description absorbs the card's spare height. `flex:1` on
+   every <p> also stretched the role line and the country chip, so on wide
+   screens the chip grew into a tall pill with its label floating at the top. */
+.org > p:not([class]){flex:1}
 .org__role{
   font-size:.7rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
   color:var(--text-muted);
