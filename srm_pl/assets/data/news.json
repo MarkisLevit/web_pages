@@ -1,6 +1,6 @@
 {
   "channel": "https://t.me/SolidRockRzeszow",
-  "updated": "2026-09-08",
+  "updated": "2026-09-10",
   "imageBase": "assets/img/news/",
   "place": {
     "pl": "Al. Gen. Władysława Sikorskiego 114, Rzeszów",
@@ -96,6 +96,51 @@
           "Free entry, no sign-up",
           "Activities for children",
           "International speakers"
+        ]
+      }
+    },
+    {
+      "id": "2026-09-09-grupa-domowa-wraca",
+      "date": "2026-09-09",
+      "kind": "past",
+      "link": "https://t.me/SolidRockRzeszow/536",
+      "where": {
+        "pl": "Sikorskiego 114, Rzeszów",
+        "en": "Sikorskiego 114, Rzeszów"
+      },
+      "photos": [
+        {
+          "src": "grupa-domowa-0909",
+          "w": 666,
+          "h": 800,
+          "pl": "Grafika zapraszająca na grupę domową: przytulny salon z kanapą, poduszkami, zapaloną świecą i Biblią na stoliku, z ukraińskim napisem „Домашня група”, godziną 18:00 i adresem Sikorskiego 114.",
+          "en": "Invitation graphic for the home group: a cosy living room with a sofa, cushions, a lit candle and a Bible on the table, with Ukrainian lettering reading “Домашня група”, the time 18:00 and the address Sikorskiego 114."
+        }
+      ],
+      "pl": {
+        "title": "Grupa domowa wraca po przerwie",
+        "lead": "9 września, po wakacyjnej przerwie, znów spotkaliśmy się w środę o 18:00 przy Sikorskiego 114. Od tej pory grupa domowa działa jak dawniej — w każdą środę.",
+        "body": [
+          "Grupa domowa to mniejsze grono niż niedzielne nabożeństwo: wspólne czytanie Biblii, modlitwa, rozmowa i zwyczajne bycie razem. Spotykamy się, żeby nawzajem się wspierać.",
+          "W zaproszeniu napisaliśmy: „Przyjdźcie w dobrym nastroju, a jeśli go nie ma — poszukamy go razem”. To chyba najkrótszy opis tego, po co się spotykamy."
+        ],
+        "facts": [
+          "W każdą środę, 18:00",
+          "Sikorskiego 114, Rzeszów",
+          "Rozmowa, modlitwa, wzajemne wsparcie"
+        ]
+      },
+      "en": {
+        "title": "The home group is back after the break",
+        "lead": "On 9 September, after the summer break, we met again on Wednesday at 18:00 at Sikorskiego 114. From now on the home group runs as before — every Wednesday.",
+        "body": [
+          "The home group is a smaller circle than the Sunday service: reading the Bible together, prayer, conversation and simply being in one another’s company. We meet to support each other.",
+          "The invitation put it this way: “Come in a good mood — and if you haven’t got one, we will look for it together.” That is probably the shortest description of why we meet."
+        ],
+        "facts": [
+          "Every Wednesday, 18:00",
+          "Sikorskiego 114, Rzeszów",
+          "Conversation, prayer, mutual support"
         ]
       }
     },
