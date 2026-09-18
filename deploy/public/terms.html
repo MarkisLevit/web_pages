@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+  DRAFT. A starting point for a lawyer to review — not legal advice.
+
+  Two things to settle before this goes live:
+
+  1. The refund windows on the landing page do not agree with each other.
+     index.html:473 and the FAQ say "within 5 minutes of the call starting";
+     index.html:527 says "tell us within 24 hours". Section 5 below treats them
+     as two separate rights, which is the reading that favours the customer.
+     Whatever you decide, the page and this document must say the same thing.
+
+  2. The 14-day right of withdrawal (Section 6). For services under the EU
+     Consumer Rights Directive, a customer who wants the service to start
+     inside those 14 days must expressly request it AND acknowledge they lose
+     the right once it is fully performed. That acknowledgement is not in the
+     checkout flow today.
+
+  Remove the .draft banner once the page has been reviewed.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms — Kindred</title>
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F2; --surface:#FFFFFF; --text:#1E1814; --muted:#6B5D52;
+  --line:rgba(30,24,20,.13); --accent:#A8763A; --accent-soft:rgba(168,118,58,.10);
+  --warn:rgba(168,118,58,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14100D; --surface:#1F1813; --text:#F4ECE2; --muted:#A79684;
+    --line:rgba(244,236,226,.14); --accent:#DBA85F; --accent-soft:rgba(219,168,95,.13);
+    --warn:rgba(219,168,95,.10);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14100D; --surface:#1F1813; --text:#F4ECE2; --muted:#A79684;
+  --line:rgba(244,236,226,.14); --accent:#DBA85F; --accent-soft:rgba(219,168,95,.13);
+  --warn:rgba(219,168,95,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line);padding:22px 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:600;
+  color:var(--text);text-decoration:none}
+.back{color:var(--accent);text-decoration:none;font-size:14px}
+.back:hover{text-decoration:underline}
+main{padding:40px 0 72px}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:40px;
+  line-height:1.12;letter-spacing:-.01em;margin:0 0 10px}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:23px;
+  line-height:1.2;margin:38px 0 10px}
+p,li{color:var(--text)}
+.muted{color:var(--muted)}
+.updated{color:var(--muted);font-size:14px;margin:0 0 28px}
+a{color:var(--accent)}
+ul{padding-left:20px}
+li{margin:5px 0}
+.draft{background:var(--warn);border:1px solid var(--accent);border-radius:12px;
+  padding:14px 16px;margin:0 0 30px;font-size:14.5px}
+.draft strong{color:var(--accent)}
+.safety{background:var(--accent-soft);border-left:3px solid var(--accent);
+  border-radius:0 10px 10px 0;padding:14px 16px;margin:20px 0}
+.todo{background:var(--accent-soft);border-radius:6px;padding:1px 6px;
+  font-size:13.5px;font-weight:600;color:var(--accent);white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:14px}
+footer a{margin-right:16px}
+@media(max-width:600px){h1{font-size:31px}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a class="brand" href="/">Kindred</a>
+  <a class="back" href="/">← Back to site</a>
+</div></header>
+
+<main class="wrap">
+
+  <h1>Terms of Service</h1>
+  <p class="updated">Last updated: <span class="todo">[DATE]</span></p>
+
+  <div class="draft">
+    <strong>Draft — not yet reviewed.</strong> These terms describe how the service is built to
+    behave. They have not been checked by a lawyer and the bracketed items are not yet filled in.
+  </div>
+
+  <h2>1. Who you are dealing with</h2>
+  <p>
+    Kindred is operated by <span class="todo">[LEGAL ENTITY NAME]</span>,
+    <span class="todo">[REGISTERED ADDRESS]</span>, company number
+    <span class="todo">[NUMBER]</span>. Contact: <span class="todo">[SUPPORT EMAIL]</span>.
+  </p>
+  <p>By buying a conversation or a plan, you agree to what follows.</p>
+
+  <h2>2. What Kindred is — and what it is not</h2>
+  <p>
+    Kindred is <strong>peer emotional support</strong>. You book time with a listener whose job is
+    to pay attention to you. That is the whole service.
+  </p>
+
+  <div class="safety">
+    <p style="margin:0 0 8px"><strong>Our listeners are not therapists, doctors, or counsellors.</strong>
+    They do not diagnose, treat, prescribe, or give clinical advice, and Kindred is not a substitute
+    for medical or mental-health treatment.</p>
+    <p style="margin:0"><strong>Kindred is not a crisis service.</strong> We cannot help in an
+    emergency. If you are in immediate danger, or thinking about harming yourself, contact your
+    local emergency number or a crisis helpline in your country — someone there can help faster
+    than we can.</p>
+  </div>
+
+  <p>
+    If a listener thinks what you need is clinical care, they will say so, and we will help you look
+    for it. That is not us withdrawing the service; it is the service working properly.
+  </p>
+
+  <h2>3. Your account</h2>
+  <ul>
+    <li>You must be at least <span class="todo">[16/18]</span> years old.</li>
+    <li>You can use any name you like with your listener. Your email has to be real, because that is how we reach you.</li>
+    <li>Keep your password to yourself. Tell us if you think someone else has it.</li>
+    <li>One account per person. Don't share it.</li>
+  </ul>
+
+  <h2>4. Prices and payment</h2>
+  <ul>
+    <li>Prices are the ones shown at checkout, in the currency shown there. Taxes are as displayed.</li>
+    <li>Payment is handled by <strong>Stripe</strong>. We never see or store your card details.</li>
+    <li><strong>Single calls</strong> are paid once, for one conversation of the stated length.</li>
+    <li><strong>Monthly and annual plans renew automatically</strong> until you cancel. You are charged at the start of each period, at the price you signed up at. If we ever change that price, we will tell you before it applies and you can cancel first.</li>
+    <li>Charges appear on your statement as <span class="todo">[STATEMENT DESCRIPTOR — set this in Stripe → Settings → Public details]</span>.</li>
+    <li>If a payment fails, we may pause the plan until it goes through.</li>
+  </ul>
+
+  <h2>5. Refunds and the guarantee</h2>
+  <p>These are two separate promises, and you can use either.</p>
+  <ul>
+    <li><strong>Wrong match:</strong> if the listener isn't right for you, say so within the first
+      <strong>5 minutes</strong> of the call. We rematch you free, or refund that call in full — your choice.</li>
+    <li><strong>First call guarantee:</strong> if your first conversation didn't help, tell us within
+      <strong>24 hours</strong> of it ending and we refund it in full. No explanation required.</li>
+  </ul>
+  <p>
+    For plans: cancel whenever you like and you keep access until the end of the period you already
+    paid for. We do not pro-rate part-used periods beyond that, except where the law says we must.
+  </p>
+  <p>
+    Refunds go back to the card you paid with, usually within
+    <span class="todo">[N]</span> working days. Ask at <span class="todo">[SUPPORT EMAIL]</span>.
+  </p>
+
+  <h2>6. Your right to change your mind (EU/EEA)</h2>
+  <p>
+    If you are a consumer in the EU or EEA you normally have <strong>14 days</strong> to withdraw
+    from a distance contract without giving a reason.
+  </p>
+  <p>
+    Because you probably want to talk to someone sooner than that, asking us to start within the
+    14 days counts as expressly requesting early performance. Once a conversation has been fully
+    delivered at your request, the right of withdrawal for that conversation is used up. Anything
+    not yet delivered, you can still withdraw from.
+  </p>
+  <p class="muted">
+    <span class="todo">[To confirm with counsel, and to add to the checkout flow: the express request
+    and the acknowledgement of losing the right must both be captured at purchase. The sign-up form
+    does not do this today.]</span>
+  </p>
+
+  <h2>7. Cancelling</h2>
+  <p>
+    Cancel from your account. No phone call, no retention script. Cancelling stops the next charge;
+    it does not refund the period you are in, which you keep until it ends.
+  </p>
+
+  <h2>8. How to behave</h2>
+  <p>Listeners are people doing a job. Don't:</p>
+  <ul>
+    <li>abuse, threaten, harass, or make sexual advances toward them;</li>
+    <li>record a call without their consent;</li>
+    <li>use Kindred for anything illegal, or to arrange harm to anyone;</li>
+    <li>try to move a listener off the platform to avoid paying.</li>
+  </ul>
+  <p>We may end a call, suspend, or close an account for any of these. Serious cases get no refund.</p>
+
+  <h2>9. Confidentiality</h2>
+  <p>
+    What you say to a listener stays between you. Calls are not recorded and no transcript is kept.
+  </p>
+  <p>
+    The exception is a narrow one, and we would rather tell you now than surprise you later: if a
+    listener genuinely believes someone's life is in danger — yours or another person's — they may
+    pass on what is necessary to get help. <span class="todo">[Confirm the exact wording and your
+    escalation procedure with counsel; it must match what you actually do.]</span>
+  </p>
+  <p>How we handle your data is set out in our <a href="/privacy">Privacy Policy</a>.</p>
+
+  <h2>10. Availability</h2>
+  <p>
+    We aim to keep the service running, but we do not promise it will never be unavailable. We may
+    change or discontinue parts of it; if we discontinue something you have paid for, we refund the
+    unused part.
+  </p>
+
+  <h2>11. Liability</h2>
+  <p>
+    Kindred is emotional support, not treatment or advice, and decisions you make after a
+    conversation are your own. To the extent the law allows, our liability for any claim connected
+    to the service is limited to what you paid us in the
+    <span class="todo">[12]</span> months before the claim.
+  </p>
+  <p>
+    Nothing here limits liability for death or personal injury caused by negligence, for fraud, or
+    for anything else that cannot be limited by law — and nothing here affects your statutory rights
+    as a consumer.
+  </p>
+
+  <h2>12. Changes to these terms</h2>
+  <p>
+    We may update these terms. If a change materially affects you we will give you notice by email
+    before it takes effect, and you may cancel if you do not accept it.
+  </p>
+
+  <h2>13. Law and disputes</h2>
+  <p>
+    These terms are governed by the law of <span class="todo">[JURISDICTION]</span>, without
+    affecting the mandatory consumer protections of the country you live in.
+  </p>
+  <p>
+    Talk to us first at <span class="todo">[SUPPORT EMAIL]</span> — most things are fixable. EU
+    consumers can also use the European Commission's online dispute resolution platform.
+  </p>
+
+</main>
+
+<footer class="wrap">
+  <a href="/">Home</a><a href="/privacy">Privacy</a><a href="/">FAQ</a>
+  <p class="muted" style="margin:10px 0 0">
+    Kindred is peer support, not medical care, and not a crisis service.
+    If you are in danger right now, contact your local emergency number.
+  </p>
+</footer>
+
+</body>
+</html>

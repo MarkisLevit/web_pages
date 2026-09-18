@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--
+  DRAFT. Written from what the code in server.js actually does, as a starting
+  point for a lawyer to review — not legal advice.
+
+  Every [BRACKETED] item below must be filled in before this page goes live.
+  The special-category-data question (Section 4) is the one to raise first:
+  "grief" or "loneliness" attached to a named person is arguably health data
+  under GDPR Art. 9, which needs a stronger lawful basis than ordinary data.
+
+  Remove the .draft banner once the page has been reviewed.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Kindred</title>
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F2; --surface:#FFFFFF; --text:#1E1814; --muted:#6B5D52;
+  --line:rgba(30,24,20,.13); --accent:#A8763A; --accent-soft:rgba(168,118,58,.10);
+  --warn:rgba(168,118,58,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14100D; --surface:#1F1813; --text:#F4ECE2; --muted:#A79684;
+    --line:rgba(244,236,226,.14); --accent:#DBA85F; --accent-soft:rgba(219,168,95,.13);
+    --warn:rgba(219,168,95,.10);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14100D; --surface:#1F1813; --text:#F4ECE2; --muted:#A79684;
+  --line:rgba(244,236,226,.14); --accent:#DBA85F; --accent-soft:rgba(219,168,95,.13);
+  --warn:rgba(219,168,95,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line);padding:22px 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:600;
+  color:var(--text);text-decoration:none}
+.back{color:var(--accent);text-decoration:none;font-size:14px}
+.back:hover{text-decoration:underline}
+main{padding:40px 0 72px}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:40px;
+  line-height:1.12;letter-spacing:-.01em;margin:0 0 10px}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:23px;
+  line-height:1.2;margin:38px 0 10px}
+h3{font-size:15px;font-weight:600;margin:22px 0 6px}
+p,li{color:var(--text)}
+.muted{color:var(--muted)}
+.updated{color:var(--muted);font-size:14px;margin:0 0 28px}
+a{color:var(--accent)}
+ul{padding-left:20px}
+li{margin:5px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-weight:600}
+.draft{background:var(--warn);border:1px solid var(--accent);border-radius:12px;
+  padding:14px 16px;margin:0 0 30px;font-size:14.5px}
+.draft strong{color:var(--accent)}
+.todo{background:var(--accent-soft);border-radius:6px;padding:1px 6px;
+  font-size:13.5px;font-weight:600;color:var(--accent);white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:14px}
+footer a{margin-right:16px}
+@media(max-width:600px){h1{font-size:31px}table{font-size:13.5px}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a class="brand" href="/">Kindred</a>
+  <a class="back" href="/">← Back to site</a>
+</div></header>
+
+<main class="wrap">
+
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: <span class="todo">[DATE]</span></p>
+
+  <div class="draft">
+    <strong>Draft — not yet reviewed.</strong> This page describes what the service
+    technically does with your data. It has not been checked by a lawyer, and the
+    bracketed items are not yet filled in. It should not be relied on until that is done.
+  </div>
+
+  <p>
+    Kindred is a paid peer-support service: you book a conversation with a listener.
+    This page explains what we collect, why, who else sees it, and what you can ask us to do
+    about it. It is written to be read, not to be survived.
+  </p>
+
+  <h2>1. Who is responsible</h2>
+  <p>
+    The data controller is <span class="todo">[LEGAL ENTITY NAME]</span>,
+    <span class="todo">[REGISTERED ADDRESS]</span>. For anything on this page, write to
+    <span class="todo">[PRIVACY CONTACT EMAIL]</span>.
+  </p>
+  <p class="muted">
+    <span class="todo">[If you appoint a DPO or an EU representative under Art. 27, name them here.]</span>
+  </p>
+
+  <h2>2. What we collect</h2>
+  <p>Only what the service actually uses. There are no advertising trackers on this site.</p>
+
+  <table>
+    <tr><th>What</th><th>Why</th></tr>
+    <tr><td>Your name, as you choose to give it</td><td>So your listener has something to call you. It does not have to be your legal name.</td></tr>
+    <tr><td>Email address</td><td>Your account, your receipt, and booking messages.</td></tr>
+    <tr><td>Password</td><td>Stored only as a bcrypt hash. We cannot read it, and neither can anyone who takes a copy of the database.</td></tr>
+    <tr><td>Topics you pick (e.g. grief, work, loneliness)</td><td>To match you with a listener who fits. See section 4 — this is the sensitive one.</td></tr>
+    <tr><td>Preferred language, time zone, chosen listener</td><td>Matching and scheduling.</td></tr>
+    <tr><td>Plan, billing cycle, amount, currency, payment status</td><td>To take payment and to know what you are owed.</td></tr>
+    <tr><td>Recipient's email, if you buy a gift</td><td>To deliver the gift to them.</td></tr>
+    <tr><td>Stripe customer and session identifiers</td><td>To tie your payment to your booking.</td></tr>
+    <tr><td>Your IP address</td><td>Seen by the web server and used briefly to rate-limit abuse. <span class="todo">[Confirm your server log retention.]</span></td></tr>
+  </table>
+
+  <h3>What we do not collect</h3>
+  <ul>
+    <li><strong>Card details never reach us.</strong> Payment happens on Stripe's own checkout page. We never see or store your card number.</li>
+    <li><strong>Calls are not recorded</strong>, and no transcript is kept.</li>
+    <li>No advertising or analytics trackers, and no profiling or automated decision-making.</li>
+    <li>We do not sell your data. Not to anyone, not ever.</li>
+  </ul>
+
+  <h2>3. Why we are allowed to (lawful bases)</h2>
+  <ul>
+    <li><strong>Performance of a contract</strong> (Art. 6(1)(b)) — your account, booking and payment.</li>
+    <li><strong>Legal obligation</strong> (Art. 6(1)(c)) — keeping invoice and tax records.</li>
+    <li><strong>Legitimate interests</strong> (Art. 6(1)(f)) — keeping the service secure and stopping abuse.</li>
+    <li><strong>Explicit consent</strong> (Art. 9(2)(a)) — for the topics you choose. See below.</li>
+  </ul>
+
+  <h2>4. Topics, and why we treat them carefully</h2>
+  <p>
+    When you tell us you want to talk about grief, or loneliness, that says something about your
+    mental and emotional health. Attached to your name and email, it may count as
+    <strong>special-category data</strong> under Article 9 of the GDPR — a stricter category than
+    ordinary personal data, which we may only handle with your <em>explicit</em> consent.
+  </p>
+  <p>
+    So: choosing topics is optional, it is only used to match you with a listener, it is never put
+    in a web address, never sent to advertising or analytics services, and never shared with Stripe.
+    You can withdraw consent at any time by writing to us, and we will delete those entries without
+    closing your account.
+  </p>
+  <p class="muted">
+    <span class="todo">[To confirm with counsel: that the sign-up flow captures explicit, separable,
+    freely-given consent for this — a pre-ticked box or consent bundled into the Terms is not valid
+    under Art. 9 — and that the consent wording is recorded with a timestamp.]</span>
+  </p>
+
+  <h2>5. Who else sees your data</h2>
+  <ul>
+    <li><strong>Your listener</strong> — the name you gave and the topics you chose, so they can prepare. They do not see your email, your payment details, or your address.</li>
+    <li><strong>Stripe</strong> (Stripe Payments Europe, Ltd.), our payment processor. Stripe receives your email address, the amount, and an internal reference for your sign-up — <em>not</em> your topics. Stripe handles your card details directly, as an independent controller for its own compliance purposes. See <a href="https://stripe.com/privacy" rel="noopener">stripe.com/privacy</a>.</li>
+    <li><strong>Google Fonts</strong> — this page loads its typefaces from Google's servers, which means Google sees your IP address when the page loads. <span class="todo">[Self-hosting the two fonts removes this third party entirely, and is a small change.]</span></li>
+    <li><strong>Our hosting provider</strong>, <span class="todo">[HOSTING PROVIDER AND COUNTRY]</span>, which operates the server the site runs on.</li>
+  </ul>
+  <p>
+    We disclose data to authorities only where the law actually requires it, and we will tell you
+    when we are permitted to.
+  </p>
+
+  <h2>6. Where your data lives</h2>
+  <p>
+    The database sits on a single server in <span class="todo">[COUNTRY]</span>. Stripe may process
+    data outside the EEA under the European Commission's standard contractual clauses.
+    <span class="todo">[Confirm and list any other transfers.]</span>
+  </p>
+
+  <h2>7. How long we keep it</h2>
+  <p>
+    <span class="todo">[TO DECIDE — this is currently not implemented in the code. Nothing is
+    deleted automatically today.]</span> A defensible starting point, to confirm with counsel:
+  </p>
+  <ul>
+    <li>Account details — while your account is open, then <span class="todo">[N]</span> months.</li>
+    <li>Topic selections — deleted <span class="todo">[N]</span> months after your last booking, or immediately on request.</li>
+    <li>Payment and invoice records — as long as tax law requires, typically <span class="todo">[N]</span> years.</li>
+    <li>Server logs — <span class="todo">[N]</span> days.</li>
+  </ul>
+
+  <h2>8. Your rights</h2>
+  <p>Under the GDPR you can ask us to:</p>
+  <ul>
+    <li>give you a copy of your data, or a portable export of it;</li>
+    <li>correct anything wrong;</li>
+    <li>delete it (&ldquo;the right to be forgotten&rdquo;);</li>
+    <li>restrict or object to how we use it;</li>
+    <li>withdraw a consent you gave, without affecting what we did before you withdrew it.</li>
+  </ul>
+  <p>
+    Write to <span class="todo">[PRIVACY CONTACT EMAIL]</span> and we will answer within one month.
+    There is no charge. If you think we have got it wrong you can complain to your local data
+    protection authority — in Poland, the
+    <span class="todo">[Urząd Ochrony Danych Osobowych (UODO), or the authority where you live]</span>.
+  </p>
+
+  <h2>9. Security</h2>
+  <ul>
+    <li>The whole site is served over HTTPS.</li>
+    <li>Passwords are hashed with bcrypt, never stored in readable form.</li>
+    <li>Card data never touches our server.</li>
+    <li>The administrative view is behind a long random token.</li>
+  </ul>
+  <p>
+    No system is perfectly secure. If a breach ever puts you at risk, we will tell you and the
+    regulator, as Articles 33 and 34 require.
+  </p>
+
+  <h2>10. Cookies</h2>
+  <p>
+    The site sets no advertising or analytics cookies. Stripe may set cookies necessary for
+    payment and fraud prevention on its own checkout page.
+    <span class="todo">[Recheck if you ever add analytics — that would require a consent banner.]</span>
+  </p>
+
+  <h2>11. Children</h2>
+  <p>
+    Kindred is for adults. It is not intended for anyone under <span class="todo">[16/18]</span>,
+    and we do not knowingly collect their data.
+  </p>
+
+  <h2>12. Changes</h2>
+  <p>
+    If we change this policy we will update the date at the top, and tell you by email where the
+    change actually matters to you.
+  </p>
+
+</main>
+
+<footer class="wrap">
+  <a href="/">Home</a><a href="/terms">Terms</a><a href="/">FAQ</a>
+  <p class="muted" style="margin:10px 0 0">
+    Kindred is peer support, not medical care, and not a crisis service.
+    If you are in danger right now, contact your local emergency number.
+  </p>
+</footer>
+
+</body>
+</html>

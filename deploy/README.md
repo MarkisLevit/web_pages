@@ -101,25 +101,41 @@ Pushes code and restarts the service. Skips provisioning and leaves Caddy alone.
 
 ---
 
+## Done
+
+- **Fake availability removed.** The hero strip printed "N listeners free right now ·
+  typical wait 90 seconds", counted from the hardcoded `LISTENERS` array — it would have
+  said the same at 4am with nobody employed. The per-listener "Available now / Back
+  tomorrow" badge came from the same array and is now the topics each listener covers.
+  Dead CSS went with it. The `on:` flags remain in the data, unused, for if real presence
+  ever exists.
+- **Privacy and Terms drafted** at `public/privacy.html` and `public/terms.html`, written
+  from what `server.js` actually does. Footer and checkout links now point at them.
+  **Both are drafts with `[BRACKETED]` gaps and a visible "not yet reviewed" banner.**
+
 ## Blocking issues before real traffic
 
-These are not polish. Each one is a reason not to open the doors yet.
-
-- **The hero claims listeners are online who are not.** `public/index.html:383` prints
-  "N listeners free right now · typical wait 90 seconds", counted from the hardcoded
-  `LISTENERS` array at line 674 — eight invented people with invented years of
-  experience. It will say the same thing at 4am with nobody employed. In the EU that is
-  a misleading commercial practice under the UCPD, and the audience is people having a
-  bad day. Wire it to real presence or delete the strip.
-- **Privacy and Terms links go nowhere** (`public/index.html:647`), while the checkout
-  says "you agree to our Terms" (line 953). You cannot take payment against terms that
-  do not exist.
-- **No refund policy** matching the "first call refunded" guarantee on the page.
-- **GDPR Art. 9.** Topics like grief or loneliness attached to a named person are
-  arguably health data — a stricter category than ordinary personal data. That affects
-  your privacy policy, your retention period, and your hosting contract. Get it reviewed.
+- **The legal pages need a lawyer and their blanks filled.** Entity name, address,
+  contact, jurisdiction, retention periods. Remove the draft banner only after review.
+- **The roster is eight invented people** with invented years of experience, and the FAQ
+  says they are "trained and background-checked". Removing the live counter fixed the
+  real-time claim, not this one. It needs to match who you actually employ.
+- **"Available 24/7, worldwide"** (`public/index.html:393`) is still a coverage claim —
+  make sure it is true.
+- **The refund windows contradict each other.** The timeline and FAQ say "within 5
+  minutes of the call starting"; line 527 says "within 24 hours". The draft Terms treat
+  them as two separate rights, which is the customer-friendly reading. Decide, then make
+  page and Terms agree.
+- **No 14-day withdrawal acknowledgement at checkout.** Under the Consumer Rights
+  Directive, a customer wanting the service to start inside those 14 days must expressly
+  request it *and* acknowledge losing the right once delivered. The form does not capture
+  either today.
+- **Art. 9 consent is not captured separately.** Topic selection needs explicit,
+  unbundled consent with a timestamp — consent folded into the Terms does not qualify.
 - **Login is a stub.** The modal authenticates nobody.
 - **No transactional email.** A paid customer currently gets a `console.log`.
+- **Google Fonts** are loaded from Google's servers, so Google sees every visitor's IP.
+  Self-hosting the two families removes a third party from the privacy policy entirely.
 
 ## Operational gaps
 
