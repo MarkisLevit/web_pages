@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kindred — Real people. Real conversations.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F2; --bg2:#F3ECE4; --surface:#FFFFFF; --surface2:#FAF6F1;
+  --text:#1E1814; --muted:#6B5D52; --line:rgba(30,24,20,.13);
+  --accent:#A8763A; --accent-ink:#fff; --accent-soft:rgba(168,118,58,.10);
+  --shadow:0 1px 2px rgba(30,24,20,.05),0 8px 28px rgba(30,24,20,.07);
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14100D; --bg2:#1B1511; --surface:#1F1813; --surface2:#241C16;
+    --text:#F4ECE2; --muted:#A79684; --line:rgba(244,236,226,.14);
+    --accent:#DBA85F; --accent-ink:#1A130D; --accent-soft:rgba(219,168,95,.13);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 34px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14100D; --bg2:#1B1511; --surface:#1F1813; --surface2:#241C16;
+  --text:#F4ECE2; --muted:#A79684; --line:rgba(244,236,226,.14);
+  --accent:#DBA85F; --accent-ink:#1A130D; --accent-soft:rgba(219,168,95,.13);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 34px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+h1,h2,h3{font-family:'Fraunces',Georgia,'Times New Roman',serif;font-weight:500;line-height:1.12;letter-spacing:-.01em;margin:0}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+.script{font-family:'Caveat',cursive;font-weight:500}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.muted{color:var(--muted)}
+.center{text-align:center}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;font:inherit;font-weight:500;
+  padding:13px 24px;border-radius:999px;transition:.18s;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-light{background:#F6EEE4;color:#221913}
+.btn-light:hover{background:#fff;transform:translateY(-1px)}
+.btn-block{width:100%;justify-content:center}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:26px;height:68px}
+.logo{font-family:'Fraunces',serif;font-size:20px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;gap:26px;margin-left:16px}
+.nav-links a{font-size:14.5px;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--accent)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.icon-btn{background:none;border:1px solid var(--line);border-radius:999px;width:36px;height:36px;
+  display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent)}
+.link-btn{background:none;border:0;font:inherit;font-size:14.5px;color:var(--muted);cursor:pointer}
+.link-btn:hover{color:var(--accent)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:#171009;color:#F4EADD}
+.hero-bg{position:absolute;inset:0;background:
+  radial-gradient(900px 480px at 78% 34%,rgba(226,150,74,.42),transparent 62%),
+  radial-gradient(700px 420px at 96% 74%,rgba(150,74,42,.34),transparent 65%),
+  linear-gradient(115deg,#120D09 0%,#1D140D 48%,#3A2314 100%)}
+.hero svg.skyline{position:absolute;right:0;bottom:0;width:62%;min-width:440px;opacity:.55}
+.hero-in{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;
+  padding:92px 0 84px;align-items:center}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);margin:16px 0 20px;color:#FDF6EC}
+.hero p.lede{font-size:17px;color:#D8C7B4;max-width:34em}
+.hero .chips{display:flex;flex-wrap:wrap;gap:24px;margin-top:30px}
+.chip{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.35;color:#CBB8A3;max-width:170px}
+.chip svg{flex:none;color:#E2A867;margin-top:1px}
+.hero-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-note{position:relative;text-align:center}
+.hero-note .script{font-size:34px;color:#EFD2A8;transform:rotate(-7deg);display:inline-block;line-height:1.1}
+
+/* generic sections */
+section{padding:82px 0}
+.sec-head{max-width:640px;margin:0 auto 46px}
+.sec-head h2{font-size:clamp(1.85rem,3.4vw,2.6rem);margin-bottom:12px}
+.sec-head p{color:var(--muted)}
+.alt{background:var(--bg2)}
+
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.feat{text-align:center;padding:26px 16px}
+.feat .ic{width:52px;height:52px;border-radius:999px;border:1px solid var(--line);
+  display:grid;place-items:center;margin:0 auto 18px;color:var(--accent);background:var(--accent-soft)}
+.feat h3{font-size:18px;margin-bottom:8px}
+.feat p{font-size:14px;color:var(--muted)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.step .n{width:30px;height:30px;border-radius:999px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;font-size:13px;font-weight:600;margin-bottom:16px}
+.step h3{font-size:17px;margin-bottom:8px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* listeners */
+.topics{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:34px}
+.topic{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;
+  font-size:13.5px;cursor:pointer;color:var(--muted);transition:.15s;font-family:inherit}
+.topic:hover{border-color:var(--accent);color:var(--accent)}
+.topic.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.listeners{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.lcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.av{width:46px;height:46px;border-radius:999px;background:var(--accent-soft);color:var(--accent);
+  display:grid;place-items:center;font-family:'Fraunces',serif;font-size:18px;margin-bottom:14px}
+.lcard h3{font-size:16px;margin-bottom:2px}
+.lrole{font-size:12px;color:var(--muted);margin-bottom:12px}
+.lcard p{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+.dot{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.dot i{width:7px;height:7px;border-radius:99px;background:#4FA96B;display:block}
+.dot.off i{background:#B9A88F}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.q p{font-size:14.5px;margin-bottom:16px}
+.q .who{display:flex;gap:11px;align-items:center}
+.q .who .av{width:34px;height:34px;font-size:14px;margin:0}
+.q strong{font-size:13.5px;font-weight:600;display:block}
+.q span{font-size:12px;color:var(--muted)}
+
+/* pricing */
+.toggle{display:inline-flex;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:4px;margin:0 auto 34px;gap:2px}
+.toggle button{border:0;background:none;font:inherit;font-size:13.5px;padding:8px 18px;border-radius:999px;cursor:pointer;color:var(--muted)}
+.toggle button.on{background:var(--accent);color:var(--accent-ink);font-weight:500}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;position:relative;box-shadow:var(--shadow)}
+.plan.best{border-color:var(--accent);border-width:1.5px}
+.badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accent-ink);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 13px;border-radius:999px;font-weight:600}
+.plan h3{font-size:18px;margin-bottom:3px}
+.plan .sub{font-size:13px;color:var(--muted);margin-bottom:18px}
+.price{font-family:'Fraunces',serif;font-size:42px;line-height:1}
+.price small{font-size:14px;font-family:'Inter',sans-serif;color:var(--muted)}
+.percall{font-size:12.5px;color:var(--muted);margin:6px 0 20px}
+.plan ul{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px}
+.plan li{font-size:13.5px;display:flex;gap:9px;align-items:flex-start;color:var(--muted)}
+.plan li svg{flex:none;color:var(--accent);margin-top:3px}
+
+/* safety */
+.safety{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:var(--radius);padding:26px 28px;display:flex;gap:18px;align-items:flex-start;box-shadow:var(--shadow)}
+.safety svg{flex:none;color:var(--accent);margin-top:3px}
+.safety h3{font-size:17px;margin-bottom:7px}
+.safety p{font-size:14px;color:var(--muted)}
+
+/* faq */
+.faq{max-width:760px;margin:0 auto}
+.acc{border-bottom:1px solid var(--line)}
+.acc button{width:100%;background:none;border:0;font:inherit;font-size:15.5px;font-weight:500;color:var(--text);
+  text-align:left;padding:20px 30px 20px 0;cursor:pointer;position:relative}
+.acc button:after{content:'+';position:absolute;right:4px;top:18px;font-size:20px;color:var(--accent);transition:.2s}
+.acc.open button:after{transform:rotate(45deg)}
+.acc .body{max-height:0;overflow:hidden;transition:max-height .28s ease}
+.acc .body p{font-size:14.5px;color:var(--muted);padding:0 40px 20px 0}
+
+/* final cta */
+.cta-band{background:linear-gradient(120deg,#1B120B,#3A2414 70%,#5A3418);color:#F6EADB;border-radius:22px;
+  padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-band h2{font-size:clamp(1.9rem,3.4vw,2.6rem);color:#FDF5EA;margin-bottom:12px}
+.cta-band p{color:#D6C4AF;margin-bottom:26px}
+.cta-band .script{position:absolute;left:36px;top:34px;font-size:26px;color:rgba(239,210,168,.6);transform:rotate(-8deg)}
+.paylogos{display:flex;gap:20px;justify-content:center;margin-top:24px;font-size:11.5px;color:#B8A38B;flex-wrap:wrap}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:38px 0;font-size:13px;color:var(--muted)}
+.foot{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.foot nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--accent)}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(16,11,7,.68);backdrop-filter:blur(4px);z-index:100;
+  display:none;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.overlay.on{display:flex}
+.modal{background:var(--bg);border:1px solid var(--line);border-radius:18px;width:100%;max-width:520px;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);max-height:94vh;overflow-y:auto;margin:auto}
+.mhead{padding:24px 26px 0;position:relative}
+.mhead h3{font-size:22px;margin-bottom:5px}
+.mhead p{font-size:13.5px;color:var(--muted)}
+.close{position:absolute;right:18px;top:18px;background:none;border:0;font-size:24px;line-height:1;
+  color:var(--muted);cursor:pointer}
+.close:hover{color:var(--accent)}
+.bar{display:flex;gap:6px;padding:20px 26px 0}
+.bar i{height:3px;flex:1;background:var(--line);border-radius:9px}
+.bar i.on{background:var(--accent)}
+.mbody{padding:22px 26px 26px}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:12.5px;font-weight:500;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface);color:var(--text);font:inherit;font-size:14.5px}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:#D2553F;font-size:12.5px;margin-top:6px;display:none}
+.err.on{display:block}
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+.pick{display:grid;gap:10px;margin-bottom:16px}
+.opt{border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;
+  gap:12px;align-items:center;background:var(--surface)}
+.opt.on{border-color:var(--accent);background:var(--accent-soft)}
+.opt .t{flex:1}
+.opt strong{display:block;font-size:14.5px;font-weight:500}
+.opt span{font-size:12.5px;color:var(--muted)}
+.opt b{font-family:'Fraunces',serif;font-weight:500;font-size:18px}
+.summary{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px;font-size:13.5px}
+.summary div{display:flex;justify-content:space-between;padding:4px 0;color:var(--muted)}
+.summary div.total{border-top:1px solid var(--line);margin-top:8px;padding-top:10px;color:var(--text);font-weight:600;font-size:15px}
+.notice{background:var(--accent-soft);border:1px dashed var(--accent);border-radius:10px;padding:11px 13px;
+  font-size:12.5px;color:var(--muted);margin-bottom:16px}
+.mfoot{display:flex;gap:10px;margin-top:6px}
+.mfoot .btn{flex:1;justify-content:center}
+.tickwrap{text-align:center;padding:14px 0 6px}
+.tick{width:62px;height:62px;border-radius:999px;background:var(--accent-soft);color:var(--accent);
+  display:grid;place-items:center;margin:0 auto 18px}
+.admin{position:fixed;right:18px;bottom:18px;z-index:70;display:none}
+table.adm{width:100%;border-collapse:collapse;font-size:12.5px}
+table.adm th,table.adm td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+table.adm th{color:var(--muted);font-weight:500}
+.scrollx{overflow-x:auto}
+
+/* ---- conversion elements ---- */
+.livestrip{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,215,154,.3);border-radius:999px;padding:7px 15px;font-size:12.5px;color:#E8D6BE;margin-bottom:14px}
+.pulse{width:8px;height:8px;border-radius:99px;background:#5FBE7C;box-shadow:0 0 0 0 rgba(95,190,124,.7);animation:pl 2.4s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 9px rgba(95,190,124,0)}100%{box-shadow:0 0 0 0 rgba(95,190,124,0)}}
+.guar{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#CBB8A3;margin-top:14px}
+.guar svg{color:#7FC894;flex:none}
+
+.mood{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 28px;
+  box-shadow:var(--shadow);margin-top:-44px;position:relative;z-index:5}
+.mood h3{font-size:20px;margin-bottom:5px}
+.mood p.s{font-size:13.5px;color:var(--muted);margin-bottom:18px}
+.moods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mood-b{border:1px solid var(--line);background:var(--surface2);border-radius:12px;padding:14px 16px;
+  text-align:left;cursor:pointer;font:inherit;color:var(--text);transition:.15s;display:flex;gap:11px;align-items:center}
+.mood-b:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-2px)}
+.mood-b b{font-weight:500;font-size:14px;display:block;color:var(--text);margin-bottom:1px}
+.mood-b span{font-size:11.5px;color:var(--muted)}
+.mood-b .e{font-size:19px;flex:none}
+
+.gcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.gcard .ic2{width:40px;height:40px;border-radius:11px;background:var(--accent-soft);color:var(--accent);
+  display:grid;place-items:center;margin-bottom:14px}
+.gcard h3{font-size:16px;margin-bottom:7px}
+.gcard p{font-size:13.5px;color:var(--muted)}
+
+.cmpwrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);min-width:560px}
+.cmp th,.cmp td{padding:14px 16px;text-align:left;font-size:13.5px;border-bottom:1px solid var(--line)}
+.cmp th{font-weight:500;font-size:12.5px;color:var(--muted);background:var(--surface2)}
+.cmp th.us,.cmp td.us{background:var(--accent-soft)}
+.cmp th.us{color:var(--accent);font-weight:600}
+.cmp tr:last-child td{border-bottom:0}
+
+.tl{display:grid;grid-template-columns:repeat(4,1fr);position:relative;margin-top:44px}
+.tl:before{content:'';position:absolute;top:19px;left:10%;right:10%;height:1px;background:var(--line)}
+.tli{text-align:center;padding:0 10px}
+.tli .m{width:38px;height:38px;border-radius:999px;background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;margin:0 auto 14px;font-size:11px;font-weight:600;position:relative;z-index:2}
+.tli h3{font-size:15px;margin-bottom:6px}
+.tli p{font-size:13px;color:var(--muted)}
+
+.seals{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:24px;font-size:12px;color:var(--muted)}
+.seals span{display:inline-flex;align-items:center;gap:6px}
+.seals svg{color:var(--accent);flex:none}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:80;
+  background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding:11px 18px;display:flex;align-items:center;gap:16px;
+  transform:translateY(130%);transition:transform .3s;box-shadow:0 -6px 24px rgba(0,0,0,.16)}
+.sticky.on{transform:none}
+.sticky .txt{font-size:12.5px;line-height:1.35;color:var(--muted)}
+.sticky .txt b{font-weight:600;display:block;font-size:14px;color:var(--text)}
+.sticky .btn{margin-left:auto;padding:11px 20px;font-size:14px}
+
+.bump{border:1px dashed var(--accent);background:var(--accent-soft);border-radius:12px;padding:13px 15px;
+  display:flex;gap:11px;align-items:flex-start;margin-bottom:16px;cursor:pointer}
+.bump input{margin-top:3px;accent-color:var(--accent);flex:none}
+.bump strong{font-size:13.5px;font-weight:600;display:block}
+.bump span{font-size:12.5px;color:var(--muted)}
+.reassure{display:grid;gap:7px;margin-bottom:16px}
+.reassure div{font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+.reassure svg{color:#5FA97A;flex:none;margin-top:3px}
+
+@media(max-width:980px){
+  .moods{grid-template-columns:1fr}
+  .gcards{grid-template-columns:1fr}
+  .tl{grid-template-columns:repeat(2,1fr);gap:28px 0}
+  .tl:before{display:none}
+  .hero-in{grid-template-columns:1fr;padding:64px 0 60px}
+  .hero-note{display:none}
+  .grid4,.listeners{grid-template-columns:repeat(2,1fr)}
+  .steps,.quotes,.plans{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:560px){
+  .grid4,.listeners{grid-template-columns:1fr}
+  section{padding:58px 0}
+  .cta-band{padding:40px 22px}
+  .cta-band .script{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">Kindred</a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#people">Our people</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="themeBtn" title="Switch theme" aria-label="Switch theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button class="link-btn" onclick="openFlow('login')">Log in</button>
+      <button class="btn btn-primary" style="padding:10px 20px;font-size:14px" onclick="openFlow('signup')">Get started</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-bg"></div>
+  <svg class="skyline" viewBox="0 0 800 420" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3A2314" stop-opacity=".1"/>
+        <stop offset="100%" stop-color="#0E0906" stop-opacity=".95"/>
+      </linearGradient>
+      <radialGradient id="sun" cx="72%" cy="30%" r="26%">
+        <stop offset="0%" stop-color="#FFC978" stop-opacity=".85"/>
+        <stop offset="100%" stop-color="#FFC978" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="800" height="420" fill="url(#sun)"/>
+    <g fill="url(#sg)">
+      <rect x="20" y="250" width="58" height="170"/><rect x="88" y="205" width="44" height="215"/>
+      <rect x="142" y="285" width="70" height="135"/><rect x="222" y="170" width="52" height="250"/>
+      <rect x="284" y="238" width="38" height="182"/><rect x="332" y="120" width="62" height="300"/>
+      <rect x="404" y="212" width="46" height="208"/><rect x="460" y="268" width="66" height="152"/>
+      <rect x="536" y="186" width="42" height="234"/><rect x="588" y="246" width="58" height="174"/>
+      <rect x="656" y="150" width="50" height="270"/><rect x="716" y="228" width="64" height="192"/>
+    </g>
+    <g fill="#FFD79A" opacity=".55">
+      <rect x="36" y="272" width="6" height="9"/><rect x="52" y="296" width="6" height="9"/>
+      <rect x="102" y="228" width="6" height="9"/><rect x="114" y="262" width="6" height="9"/>
+      <rect x="240" y="196" width="6" height="9"/><rect x="252" y="238" width="6" height="9"/>
+      <rect x="348" y="152" width="6" height="9"/><rect x="366" y="196" width="6" height="9"/>
+      <rect x="420" y="240" width="6" height="9"/><rect x="552" y="214" width="6" height="9"/>
+      <rect x="672" y="180" width="6" height="9"/><rect x="736" y="256" width="6" height="9"/>
+    </g>
+  </svg>
+  <div class="wrap hero-in">
+    <div>
+      <div class="eyebrow" style="color:#E2A867">Real people. Real conversations.</div>
+      <h1>Sometimes you just<br>need someone<br>to talk to.</h1>
+      <p class="lede">Life gets heavy. Whether you're stressed, lonely, or just need to get something off your chest — we're here to listen. No judgment. No advice unless you ask for it. Just a real conversation with a real person.</p>
+      <div class="hero-cta">
+        <button class="btn btn-light" onclick="openFlow('signup')">Talk now — $19 for 30 minutes
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="guar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        <span>If your first call doesn't help, you don't pay for it. No questions asked.</span>
+      </div>
+      <div class="chips">
+        <div class="chip"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.4-3 8.2-7 9-4-.8-7-4.6-7-9V6l7-3z"/></svg><span>100% private &amp; confidential</span></div>
+        <div class="chip"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Available 24/7, worldwide</span></div>
+        <div class="chip"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 19c.6-3.4 3.2-5.2 6.5-5.2s5.9 1.8 6.5 5.2M17 5.5a3 3 0 010 5.6M19 19c-.2-1.6-.7-2.9-1.6-3.9"/></svg><span>Trained, vetted listeners</span></div>
+        <div class="chip"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H7l-3 3z"/></svg><span>Voice, video or text — your call</span></div>
+      </div>
+    </div>
+    <div class="hero-note"><span class="script">You're<br>not alone</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="mood">
+    <h3>What's on your mind right now?</h3>
+    <p class="s">Tap one and we'll find the right person. You can stop at any point — nothing is charged until you say so.</p>
+    <div class="moods">
+      <button class="mood-b" onclick="openFlow('signup',null,null,'lonely')"><span class="e">🌙</span><span><b>I feel alone</b><span>Evenings are the hardest</span></span></button>
+      <button class="mood-b" onclick="openFlow('signup',null,null,'work')"><span class="e">🔥</span><span><b>Work is crushing me</b><span>Burnout, pressure, no off switch</span></span></button>
+      <button class="mood-b" onclick="openFlow('signup',null,null,'relationships')"><span class="e">💬</span><span><b>Something with someone</b><span>Family, partner, friendship</span></span></button>
+      <button class="mood-b" onclick="openFlow('signup',null,null,'grief')"><span class="e">🕊️</span><span><b>I've lost someone</b><span>Grief nobody else mentions</span></span></button>
+      <button class="mood-b" onclick="openFlow('signup',null,null,'change')"><span class="e">🧭</span><span><b>Everything's changing</b><span>New city, new job, starting over</span></span></button>
+      <button class="mood-b" onclick="openFlow('signup',null,null,'other')"><span class="e">💭</span><span><b>I just need to talk</b><span>No label needed</span></span></button>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2>Why Kindred</h2>
+      <p>Not therapy. Not a chatbot. Just the thing people actually miss — someone who listens.</p>
+    </div>
+    <div class="grid4">
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.7-4 3.8-6 7.5-6s6.8 2 7.5 6"/></svg></div>
+        <h3>Real human connection</h3>
+        <p>You talk to a caring, trained listener — never a bot, never a script.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7.5-4.6-7.5-9.4A4.1 4.1 0 0112 8.6a4.1 4.1 0 017.5 2c0 4.8-7.5 9.4-7.5 9.4z"/></svg></div>
+        <h3>No judgment</h3>
+        <p>Say what's actually on your mind. Nothing you share is too small or too messy.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg></div>
+        <h3>Whenever you need it</h3>
+        <p>Call at 3pm or 3am. Book ahead or connect in under two minutes. Cancel anytime.</p>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 017 0v2.7"/></svg></div>
+        <h3>Your privacy matters</h3>
+        <p>Anonymous by default. Calls are never recorded. Your data is never sold.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="how">
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2>How it works</h2>
+      <p>Three steps to a better day. The whole thing takes about two minutes.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Create your account</h3>
+        <p>Name (or a nickname), email, and a few words about what you'd like to talk about. That's it.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>We match you</h3>
+        <p>Our system finds a listener who fits your topic, language and time zone — or pick one yourself.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Have your conversation</h3>
+        <p>Talk, share, feel heard. Rate your listener afterwards so your next match is even better.</p>
+      </div>
+    </div>
+
+    <div class="center" style="margin-top:56px">
+      <h3 style="font-family:'Fraunces',serif;font-size:22px;margin-bottom:8px">Nervous about the first call? Here's exactly what happens.</h3>
+      <p class="muted" style="font-size:14px">Most people say the hardest part was pressing the button.</p>
+    </div>
+    <div class="tl">
+      <div class="tli"><div class="m">0:00</div><h3>They say hello</h3><p>No form, no intake questions. Just a warm voice and your first name.</p></div>
+      <div class="tli"><div class="m">0:30</div><h3>You talk</h3><p>Or you don't. Silence is fine. They'll follow wherever you go.</p></div>
+      <div class="tli"><div class="m">5:00</div><h3>Not right?</h3><p>Say so and we rematch you free, or refund the call entirely.</p></div>
+      <div class="tli"><div class="m">30:00</div><h3>You hang up</h3><p>Nothing recorded, nothing stored. Book the same person again if you want.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2>Find your listener</h2>
+      <p>Pick what's on your mind and see who's available right now.</p>
+    </div>
+    <div class="topics" id="topics">
+      <button class="topic on" data-t="all">Everything</button>
+      <button class="topic" data-t="lonely">Loneliness</button>
+      <button class="topic" data-t="work">Work &amp; burnout</button>
+      <button class="topic" data-t="relationships">Relationships</button>
+      <button class="topic" data-t="grief">Grief &amp; loss</button>
+      <button class="topic" data-t="change">Big life changes</button>
+    </div>
+    <div class="listeners" id="listeners"></div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head center"><h2>Real stories. Real people.</h2></div>
+    <div class="quotes">
+      <div class="q">
+        <p>"I was having a really tough week and just needed someone to listen. This gave me exactly what I needed. I felt so much lighter after the call."</p>
+        <div class="who"><div class="av">S</div><div><strong>Sarah M.</strong><span>United States</span></div></div>
+      </div>
+      <div class="q">
+        <p>"I didn't want advice, I just wanted to talk. My listener was kind, understanding, and made me feel like I wasn't alone."</p>
+        <div class="who"><div class="av">J</div><div><strong>James T.</strong><span>Canada</span></div></div>
+      </div>
+      <div class="q">
+        <p>"I love that I can just be myself here. No pressure, no judgment. It's become part of my weekly routine."</p>
+        <div class="who"><div class="av">E</div><div><strong>Emily R.</strong><span>United Kingdom</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2>Nothing to lose by trying</h2>
+      <p>The three things people worry about before they book — handled.</p>
+    </div>
+    <div class="gcards">
+      <div class="gcard">
+        <div class="ic2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 4v5c0 5-3.4 8.9-8 10-4.6-1.1-8-5-8-10V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>First call risk-free</h3>
+        <p>If your first conversation doesn't help, tell us within 24 hours and we refund it in full. You keep nothing you didn't want.</p>
+      </div>
+      <div class="gcard">
+        <div class="ic2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg></div>
+        <h3>Discreet on your statement</h3>
+        <p>Charges appear as <strong>KND&nbsp;DIGITAL</strong> — never as anything to do with counselling or support. Nobody else needs to know.</p>
+      </div>
+      <div class="gcard">
+        <div class="ic2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></div>
+        <h3>Cancel in two clicks</h3>
+        <p>No phone call, no retention script, no "are you sure?" three times. Cancel from your account and it's done immediately.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:52px">
+      <div class="sec-head center" style="margin-bottom:26px">
+        <h2 style="font-size:1.6rem">What $19 actually buys you</h2>
+      </div>
+      <div class="cmpwrap">
+        <table class="cmp">
+          <tr>
+            <th></th><th class="us">Kindred</th><th>A therapy session</th><th>Free support forums</th>
+          </tr>
+          <tr>
+            <td><strong>Typical cost</strong></td><td class="us">$19 per 30 min</td><td>$90–200 per hour</td><td>Free</td>
+          </tr>
+          <tr>
+            <td><strong>Wait to be heard</strong></td><td class="us">Under 2 minutes</td><td>Days to weeks</td><td>Hours, if anyone replies</td>
+          </tr>
+          <tr>
+            <td><strong>Who you get</strong></td><td class="us">Vetted, trained, the same person each time if you want</td><td>Licensed clinician</td><td>Whoever happens to be online</td>
+          </tr>
+          <tr>
+            <td><strong>Commitment</strong></td><td class="us">None — pay per call</td><td>Usually a course of sessions</td><td>None</td>
+          </tr>
+          <tr>
+            <td><strong>Best for</strong></td><td class="us">The bad evening you need to talk through tonight</td><td>Diagnosing and treating a condition</td><td>Browsing other people's experiences</td>
+          </tr>
+        </table>
+      </div>
+      <p class="center muted" style="font-size:12.5px;margin-top:14px">We're not trying to replace therapy. If that's what you need, we'll tell you.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="alt">
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2>Simple, transparent pricing</h2>
+      <p>One conversation can change your day. No contracts, no hidden fees, cancel anytime.</p>
+    </div>
+    <div class="center">
+      <div class="toggle" id="cycle">
+        <button class="on" data-c="monthly">Monthly</button>
+        <button data-c="annual">Annual — save 20%</button>
+      </div>
+    </div>
+    <div class="plans" id="plans"></div>
+    <div class="seals">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 017 0v2.7"/></svg>256-bit encrypted checkout</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 12.5l5 5L20 6.5"/></svg>First call refunded if it doesn't help</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>No auto-renew without an email first</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l8 4v5c0 5-3.4 8.9-8 10-4.6-1.1-8-5-8-10V7l8-4z"/></svg>GDPR compliant · data never sold</span>
+    </div>
+    <p class="center muted" style="font-size:13px;margin-top:22px">
+      Buying for someone who needs it?
+      <button class="link-btn" style="color:var(--accent);font-weight:500" onclick="openFlow('gift')">Gift a conversation →</button>
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:860px">
+    <div class="safety">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4v5c0 5-3.4 8.9-8 10-4.6-1.1-8-5-8-10V7l8-4z"/><path d="M12 9v4M12 16h.01"/></svg>
+      <div>
+        <h3>What Kindred is — and isn't</h3>
+        <p>Kindred is peer emotional support. Our listeners are trained and vetted, but they are not therapists, doctors, or counsellors, and Kindred is not a substitute for medical or mental-health treatment. We're also not a crisis service. If you're in immediate danger or thinking about harming yourself, please contact your local emergency number or a crisis helpline in your country right away — a real person there can help faster than we can.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center"><h2>Questions, answered</h2></div>
+    <div class="faq" id="faq"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <span class="script">Better days start<br>with a conversation</span>
+      <h2>Ready to talk?</h2>
+      <p>Your next conversation could be the start of a better day.</p>
+      <button class="btn btn-light" onclick="openFlow('signup')">Get started — $19 for 30 minutes
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <div class="paylogos">
+        <span>🔒 Secure payment</span><span>Visa · Mastercard · Amex</span><span>Apple Pay · Google Pay</span><span>PayPal · BLIK</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div><span class="logo" style="font-size:17px">Kindred</span><div style="font-size:12px;margin-top:3px">Real people. Real conversations.</div></div>
+    <nav>
+      <a href="#how">How it works</a><a href="#people">Our people</a><a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a>
+    </nav>
+  </div>
+  <div class="wrap" style="margin-top:20px;font-size:11.5px;opacity:.75">© 2026 Kindred. Peer support, not medical care. If you are in crisis, contact your local emergency services.</div>
+</footer>
+
+<div class="sticky" id="stickyBar">
+  <div class="txt"><b>Talk to someone tonight — $19</b>First call refunded if it doesn't help.</div>
+  <button class="btn btn-primary" onclick="openFlow('signup')">Start now</button>
+</div>
+
+
+<!-- ============ MODAL ============ -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+/* ---------- data ---------- */
+const PLANS = {
+  single:  {name:'Single call', sub:'One 30-minute conversation', monthly:19, annual:19, once:true,
+            feats:['One 30-minute call','Voice, video or text','Choose your own listener','No subscription, no auto-renew']},
+  monthly: {name:'Monthly plan', sub:'3 calls per month', monthly:49, annual:470,
+            feats:['3 × 30-minute calls each month','Priority matching (under 2 min)','Keep the same listener','Unused calls roll over one month','Cancel anytime']},
+  premium: {name:'Premium plan', sub:'Unlimited calls', monthly:89, annual:854,
+            feats:['Unlimited 30-minute calls','Instant connect, 24/7','Dedicated listener + backup','Scheduled weekly check-ins','Free for one household member']}
+};
+const LISTENERS = [
+  {n:'Maya K.', i:'M', r:'Listener · 4 yrs', t:['lonely','grief'], d:'Warm and unhurried. Good with grief, loneliness and long silences.', lang:'English, Spanish', on:true},
+  {n:'Daniel R.', i:'D', r:'Listener · 2 yrs', t:['work','change'], d:'Calm and practical. Former teacher. Work stress, burnout, career doubt.', lang:'English', on:true},
+  {n:'Aisha N.', i:'A', r:'Listener · 5 yrs', t:['relationships','lonely'], d:'Gentle and curious. Family, friendship and relationship worries.', lang:'English, Arabic', on:false},
+  {n:'Tomasz W.', i:'T', r:'Listener · 3 yrs', t:['change','work'], d:'Steady and direct. Moving country, new jobs, starting over.', lang:'Polish, English', on:true},
+  {n:'Nora P.', i:'N', r:'Listener · 6 yrs', t:['grief','relationships'], d:'Patient and quiet. Loss, caring for someone, the anniversaries nobody remembers.', lang:'English, German', on:true},
+  {n:'Ben O.', i:'B', r:'Listener · 1 yr', t:['lonely','work'], d:'Easy to talk to. Good for first-timers who feel awkward about this.', lang:'English', on:true},
+  {n:'Lena F.', i:'L', r:'Listener · 3 yrs', t:['relationships','change'], d:'Thoughtful and honest. New parenthood, break-ups, big decisions.', lang:'English, French', on:false},
+  {n:'Sam J.', i:'S', r:'Listener · 2 yrs', t:['work','grief'], d:'Grounded and warm. Night owl — usually here when nobody else is.', lang:'English', on:true}
+];
+const FAQS = [
+  ['Are your listeners therapists?','No — and that\'s deliberate. Our listeners are trained and background-checked in active listening and peer support, but they don\'t diagnose, treat, or give clinical advice. If what you need is therapy, we\'ll say so and help you find it.'],
+  ['Is it really anonymous?','You can use any name you like. Listeners never see your email, your payment details or your location. Calls are never recorded, and we don\'t sell data to anyone, ever.'],
+  ['What if I don\'t click with my listener?','Tell us within 5 minutes of the call starting and we\'ll rematch you for free, or refund that call in full. Nobody should have to push through a conversation that isn\'t working.'],
+  ['Can I keep the same person each time?','Yes. On the Monthly and Premium plans you can pin a listener and book them directly, so you don\'t have to start from zero every time.'],
+  ['What if I need to cancel?','Cancel from your account in two clicks. No phone call, no retention script. You keep access until the end of the period you already paid for.'],
+  ['Which countries do you cover?','Everywhere. Listeners are spread across time zones so there\'s always someone awake. You can filter by language when you book.']
+];
+
+/* ---------- theme ---------- */
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.onclick = ()=>{
+  const cur = document.documentElement.getAttribute('data-theme');
+  const dark = cur ? cur==='dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  try{ localStorage.setItem('kindred-theme', dark?'light':'dark'); }catch(e){}
+};
+try{ const t=localStorage.getItem('kindred-theme'); if(t) document.documentElement.setAttribute('data-theme',t); }catch(e){}
+
+/* ---------- listeners ---------- */
+let topic='all';
+function renderListeners(){
+  const list = LISTENERS.filter(l=>topic==='all'||l.t.includes(topic));
+  document.getElementById('listeners').innerHTML = list.map(l=>`
+    <div class="lcard">
+      <div class="av">${l.i}</div>
+      <h3>${l.n}</h3>
+      <div class="lrole">${l.r} · ${l.lang}</div>
+      <p>${l.d}</p>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="dot ${l.on?'':'off'}"><i></i>${l.on?'Available now':'Back tomorrow'}</span>
+        <button class="link-btn" style="color:var(--accent)" onclick="openFlow('signup','${l.n}')">Book →</button>
+      </div>
+    </div>`).join('') || '<p class="muted center" style="grid-column:1/-1">Nobody free on that topic right now — try another.</p>';
+}
+document.getElementById('topics').onclick = e=>{
+  const b=e.target.closest('.topic'); if(!b) return;
+  document.querySelectorAll('.topic').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); topic=b.dataset.t; renderListeners();
+};
+renderListeners();
+
+/* ---------- pricing ---------- */
+let cycle='monthly';
+const tick = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+function renderPlans(){
+  const order=[['single',''],['monthly','best'],['premium','']];
+  document.getElementById('plans').innerHTML = order.map(([k,cls])=>{
+    const p=PLANS[k];
+    const amt = cycle==='annual'&&!p.once ? p.annual : p.monthly;
+    const per = p.once ? '/ call' : (cycle==='annual' ? '/ year' : '/ month');
+    let note='';
+    if(k==='monthly') note = cycle==='annual' ? '$13.06 per call · save $118 a year' : '$16.33 per call';
+    if(k==='premium') note = cycle==='annual' ? 'Best value · save $214 a year' : 'Best value';
+    if(k==='single') note = 'Pay once. Nothing stored, nothing renewed.';
+    return `<div class="plan ${cls}">
+      ${cls?'<div class="badge">Most popular</div>':''}
+      <h3>${p.name}</h3><div class="sub">${p.sub}</div>
+      <div class="price">$${amt}<small> ${per}</small></div>
+      <div class="percall">${note}</div>
+      <ul>${p.feats.map(f=>`<li>${tick}<span>${f}</span></li>`).join('')}</ul>
+      <button class="btn ${cls?'btn-primary':'btn-ghost'} btn-block" onclick="openFlow('signup',null,'${k}')">Get started</button>
+    </div>`;
+  }).join('');
+}
+document.getElementById('cycle').onclick = e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#cycle button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); cycle=b.dataset.c; renderPlans();
+};
+renderPlans();
+
+/* ---------- faq ---------- */
+document.getElementById('faq').innerHTML = FAQS.map(([q,a])=>
+  `<div class="acc"><button>${q}</button><div class="body"><p>${a}</p></div></div>`).join('');
+document.getElementById('faq').onclick = e=>{
+  const b=e.target.closest('.acc button'); if(!b) return;
+  const acc=b.parentElement, body=acc.querySelector('.body'), open=acc.classList.contains('open');
+  document.querySelectorAll('.acc').forEach(a=>{a.classList.remove('open');a.querySelector('.body').style.maxHeight=null;});
+  if(!open){ acc.classList.add('open'); body.style.maxHeight = body.scrollHeight+'px'; }
+};
+
+/* ---------- backend ---------- */
+const API = ''; // same origin as this page
+
+/* ---------- signup + billing flow ---------- */
+const BUMP = 9;
+const S = {step:1, mode:'signup', name:'', email:'', pass:'', pref:[], tz:'', lang:'English',
+           listener:null, plan:'single', cycle:'monthly', method:'card', promo:'', discount:0,
+           gift:false, recipient:'', bump:false, saving:false};
+const money = n => '$'+n.toFixed(2);
+function planTotal(){
+  const p=PLANS[S.plan];
+  const base = (S.cycle==='annual'&&!p.once)? p.annual : p.monthly;
+  return Math.max(0, base - S.discount) + (S.bump?BUMP:0);
+}
+function openFlow(mode, listener, plan, pref){
+  S.gift = (mode==='gift');
+  S.mode = (mode==='login') ? 'login' : 'signup';
+  S.step = 1;
+  if(mode==='gift'){ S.plan='single'; S.bump=false; }
+  if(listener) S.listener = listener;
+  if(pref) S.pref = [pref];
+  if(plan){ S.plan = plan; S.cycle = cycle; }
+  try{ S.tz = Intl.DateTimeFormat().resolvedOptions().timeZone||''; }catch(e){}
+  document.getElementById('overlay').classList.add('on');
+  document.body.style.overflow='hidden';
+  draw();
+}
+function closeFlow(){
+  document.getElementById('overlay').classList.remove('on');
+  document.body.style.overflow='';
+}
+document.getElementById('overlay').onclick = e=>{ if(e.target.id==='overlay') closeFlow(); };
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeFlow(); });
+
+function bar(n){ return `<div class="bar">${[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`; }
+const M = document.getElementById('modal');
+
+function draw(){
+  if(S.mode==='login'){ M.innerHTML = loginView(); return; }
+  M.innerHTML = [step1, step2, step3, step4, done][S.step-1]();
+  const first = M.querySelector('input'); if(first) setTimeout(()=>first.focus(),60);
+}
+
+/* --- step 1: account --- */
+function step1(){ return `
+  <div class="mhead"><button class="close" onclick="closeFlow()">×</button>
+    <h3>${S.gift?'Gift a conversation':'Create your account'}</h3>
+    <p>${S.gift?'They\'ll get a private code by email — no name of ours on it.':'Takes about 30 seconds. Use any name you like. Nothing is charged yet.'}</p></div>
+  ${bar(1)}
+  <div class="mbody">
+    <div class="field"><label>Your name or nickname</label>
+      <input id="f_name" value="${S.name}" placeholder="e.g. Alex, or just 'A'"></div>
+    <div class="field"><label>Email</label>
+      <input id="f_email" type="email" value="${S.email}" placeholder="you@example.com">
+      <div class="hint">Only used for your receipt and booking confirmations. Never shown to listeners.</div></div>
+    <div class="field"><label>Password</label>
+      <input id="f_pass" type="password" value="${S.pass}" placeholder="At least 8 characters"></div>
+    ${S.gift?`<div class="field"><label>Who is it for?</label>
+      <input id="f_recip" value="${S.recipient}" placeholder="Their email address">
+      <div class="hint">We send them a code and a short note. They choose when to use it — it never expires.</div></div>`:''}
+    <div class="err" id="e1"></div>
+    <div class="mfoot"><button class="btn btn-primary btn-block" onclick="saveStep1()">Continue</button></div>
+    <p class="hint center" style="margin-top:14px">Already have an account?
+      <button class="link-btn" style="color:var(--accent)" onclick="S.mode='login';draw()">Log in</button></p>
+  </div>`;
+}
+function saveStep1(){
+  S.name = document.getElementById('f_name').value.trim();
+  S.email = document.getElementById('f_email').value.trim();
+  S.pass = document.getElementById('f_pass').value;
+  const r = document.getElementById('f_recip');
+  if(r) S.recipient = r.value.trim();
+  const e = document.getElementById('e1');
+  const ok = v => /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v);
+  if(!S.name) return fail(e,'Please tell us what to call you.');
+  if(!ok(S.email)) return fail(e,'That email doesn\'t look right.');
+  if(S.pass.length<8) return fail(e,'Password needs at least 8 characters.');
+  if(S.gift && !ok(S.recipient)) return fail(e,'We need a valid email for the person receiving this.');
+  S.step = S.gift ? 3 : 2; draw();
+}
+function fail(el,msg){ el.textContent=msg; el.classList.add('on'); }
+
+/* --- step 2: about you --- */
+function step2(){
+  const topics=[['lonely','Loneliness'],['work','Work & burnout'],['relationships','Relationships'],
+                ['grief','Grief & loss'],['change','Big life changes'],['other','Something else']];
+  return `
+  <div class="mhead"><button class="close" onclick="closeFlow()">×</button>
+    <h3>What brings you here?</h3><p>This helps us match you. You can change it any time.</p></div>
+  ${bar(2)}
+  <div class="mbody">
+    <div class="field"><label>Pick anything that fits</label>
+      <div class="topics" style="justify-content:flex-start;margin:0">
+        ${topics.map(([k,l])=>`<button class="topic ${S.pref.includes(k)?'on':''}" onclick="togglePref('${k}',this)">${l}</button>`).join('')}
+      </div></div>
+    <div class="row2">
+      <div class="field"><label>Preferred language</label>
+        <select id="f_lang">${['English','Polski','Español','Deutsch','Français','العربية'].map(l=>`<option ${l===S.lang?'selected':''}>${l}</option>`).join('')}</select></div>
+      <div class="field"><label>Time zone</label>
+        <input id="f_tz" value="${S.tz}" placeholder="Europe/Warsaw"></div>
+    </div>
+    ${S.listener?`<div class="notice">Booking with <strong>${S.listener}</strong>. We'll keep them as your preferred listener.</div>`:''}
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="S.step=1;draw()">Back</button>
+      <button class="btn btn-primary" onclick="saveStep2()">Continue</button></div>
+  </div>`;
+}
+function togglePref(k,el){
+  const i=S.pref.indexOf(k); if(i>-1) S.pref.splice(i,1); else S.pref.push(k);
+  el.classList.toggle('on');
+}
+function saveStep2(){
+  S.lang = document.getElementById('f_lang').value;
+  S.tz = document.getElementById('f_tz').value.trim();
+  S.step=3; draw();
+}
+
+/* --- step 3: choose plan --- */
+function step3(){
+  const opts = ['single','monthly','premium'].map(k=>{
+    const p=PLANS[k];
+    const amt = (S.cycle==='annual'&&!p.once)? p.annual : p.monthly;
+    const per = p.once?'once':(S.cycle==='annual'?'/yr':'/mo');
+    return `<div class="opt ${S.plan===k?'on':''}" onclick="S.plan='${k}';draw()">
+      <div class="t"><strong>${p.name}</strong><span>${p.sub}</span></div>
+      <b>$${amt}<span style="font-size:11px;color:var(--muted)"> ${per}</span></b></div>`;
+  }).join('');
+  return `
+  <div class="mhead"><button class="close" onclick="closeFlow()">×</button>
+    <h3>Choose your plan</h3><p>Switch or cancel whenever you want — no lock-in.</p></div>
+  ${bar(3)}
+  <div class="mbody">
+    <div class="center" style="margin-bottom:16px">
+      <div class="toggle">
+        <button class="${S.cycle==='monthly'?'on':''}" onclick="S.cycle='monthly';draw()">Monthly</button>
+        <button class="${S.cycle==='annual'?'on':''}" onclick="S.cycle='annual';draw()">Annual · −20%</button>
+      </div></div>
+    <div class="pick">${opts}</div>
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="S.step=(S.gift?1:2);draw()">Back</button>
+      <button class="btn btn-primary" onclick="S.step=4;draw()">Continue to payment</button></div>
+  </div>`;
+}
+
+/* --- step 4: payment --- */
+function step4(){
+  const p=PLANS[S.plan];
+  const base = (S.cycle==='annual'&&!p.once)? p.annual : p.monthly;
+  const methods=[['card','Credit or debit card'],['paypal','PayPal'],['wallet','Apple Pay / Google Pay'],['blik','BLIK']];
+  return `
+  <div class="mhead"><button class="close" onclick="closeFlow()">×</button>
+    <h3>Payment</h3><p>Secure checkout. You can cancel before the next renewal.</p></div>
+  ${bar(4)}
+  <div class="mbody">
+    <div class="summary">
+      <div><span>${p.name}${p.once?'':' · '+(S.cycle==='annual'?'annual':'monthly')}</span><span>${money(base)}</span></div>
+      ${S.promo?`<div><span>Promo code ${S.promo}</span><span>applied at checkout</span></div>`:''}
+      ${S.bump?`<div><span>15-minute follow-up call</span><span>${money(BUMP)}</span></div>`:''}
+      ${S.gift?`<div><span>Gift for ${S.recipient}</span><span>—</span></div>`:''}
+      <div><span>VAT</span><span>Calculated at checkout</span></div>
+      <div class="total"><span>Total due today</span><span>${money(planTotal())}</span></div>
+    </div>
+    <div class="field"><label>Payment method</label>
+      <div class="pick" style="gap:8px">
+        ${methods.map(([k,l])=>`<div class="opt ${S.method===k?'on':''}" style="padding:11px 14px" onclick="S.method='${k}';draw()">
+          <div class="t"><strong style="font-size:13.5px">${l}</strong></div></div>`).join('')}
+      </div></div>
+    ${PLANS[S.plan].once?`<label class="bump">
+      <input type="checkbox" ${S.bump?'checked':''} onchange="S.bump=!S.bump;draw()">
+      <span><strong>Add a 15-minute follow-up call — $9</strong>
+      <span>Use it any time in the next 30 days, with the same listener. Normally $12. Most people book a second call within a week.</span></span>
+    </label>`:''}
+    <div class="reassure">
+      <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12.5l5 5L20 6.5"/></svg><span>Your first call is refunded in full if it doesn't help.</span></div>
+      <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12.5l5 5L20 6.5"/></svg><span>Appears on your statement as <strong>KND DIGITAL</strong>.</span></div>
+      <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12.5l5 5L20 6.5"/></svg><span>${PLANS[S.plan].once?'One-off payment — nothing renews, nothing is stored.':'We email you 3 days before any renewal. Cancel in two clicks.'}</span></div>
+    </div>
+    <div class="notice">You'll be taken to our payment provider to finish. Kindred never sees or stores your card number.</div>
+    <div class="err" id="e4"></div>
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="S.step=3;draw()">Back</button>
+      <button class="btn btn-primary" id="payBtn" onclick="finish()">Pay ${money(planTotal())}</button></div>
+    <div class="seals" style="margin-top:16px;gap:14px">
+      <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 017 0v2.7"/></svg>Encrypted</span>
+      <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l8 4v5c0 5-3.4 8.9-8 10-4.6-1.1-8-5-8-10V7l8-4z"/></svg>GDPR compliant</span>
+      <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 12.5l5 5L20 6.5"/></svg>Money-back guarantee</span>
+    </div>
+    <p class="hint center" style="margin-top:12px">By continuing you agree to our Terms and confirm you understand Kindred is peer support, not medical care.</p>
+  </div>`;
+}
+function applyPromo(){
+  const v = document.getElementById('f_promo').value.trim().toUpperCase();
+  const msg = document.getElementById('promoMsg');
+  const codes = {FIRSTTALK:5, WELCOME10:10};
+  if(codes[v]){ S.promo=v; S.discount=codes[v]; draw(); }
+  else { S.promo=''; S.discount=0; msg.textContent='That code isn\'t valid.'; }
+}
+
+/* --- finish: persist --- */
+async function finish(){
+  if(S.saving) return;
+  S.saving = true;
+  const btn = document.getElementById('payBtn');
+  const err = document.getElementById('e4');
+  err.classList.remove('on');
+  btn.disabled = true; btn.textContent = 'Taking you to checkout\u2026';
+  try{
+    const r = await fetch(API+'/api/checkout', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name:S.name, email:S.email, password:S.pass, topics:S.pref,
+        language:S.lang, timezone:S.tz, listener:S.listener,
+        plan:S.plan, cycle:S.cycle, followUp:S.bump,
+        gift:S.gift, recipient:S.gift?S.recipient:null
+      })
+    });
+    const data = await r.json().catch(()=>({}));
+    if(!r.ok || !data.url) throw new Error(data.error || 'checkout unavailable');
+    try{ sessionStorage.setItem('kindred-exit','1'); }catch(e){}
+    window.location.href = data.url;
+    return;
+  }catch(e){
+    err.textContent = "We couldn't start checkout ("+e.message+"). Please try again.";
+    err.classList.add('on');
+    btn.disabled = false; btn.textContent = 'Pay '+money(planTotal());
+    S.saving = false;
+  }
+}
+
+function done(){ return `
+  <div class="mhead"><button class="close" onclick="closeFlow()">×</button></div>
+  <div class="mbody tickwrap">
+    <div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+    <h3 style="font-family:'Fraunces',serif;font-size:23px;margin-bottom:10px">${S.gift?'The gift is on its way.':'You\'re all set, '+S.name+'.'}</h3>
+    <p class="muted" style="font-size:14px;max-width:36ch;margin:0 auto 22px">
+      ${S.gift ? 'We\'ve emailed '+S.recipient+' a private code and a short note. Nothing in it says where it came from unless you told us to.'
+               : 'We\'ve sent a confirmation to '+S.email+'. '+(S.listener? S.listener+' is saved as your preferred listener.' : 'We\'re finding a listener who fits — usually under two minutes.')}</p>
+    <button class="btn btn-primary btn-block" onclick="closeFlow()">${S.gift?'Done':'Start my first conversation'}</button>
+    <p class="hint" style="margin-top:14px">${S.gift?'They can use it whenever they\'re ready. It never expires.':'Not ready right now? Your account is saved — come back any time.'}</p>
+  </div>`;
+}
+
+/* --- login --- */
+function loginView(){ return `
+  <div class="mhead"><button class="close" onclick="closeFlow()">×</button>
+    <h3>Welcome back</h3><p>Good to see you again.</p></div>
+  <div class="mbody">
+    <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
+    <button class="btn btn-primary btn-block" onclick="closeFlow()">Log in</button>
+    <p class="hint center" style="margin-top:14px">New here?
+      <button class="link-btn" style="color:var(--accent)" onclick="S.mode='signup';S.step=1;draw()">Create an account</button></p>
+  </div>`;
+}
+
+
+/* The live-availability strip was removed: it counted the hardcoded LISTENERS
+   array and so announced people as "free right now" whether or not anyone was.
+   If real presence data ever exists, add it back reading from that — not from
+   a literal in this file. */
+
+/* ---------- sticky CTA bar ---------- */
+const stickyBar = document.getElementById('stickyBar');
+function syncSticky(){
+  const open = document.getElementById('overlay').classList.contains('on');
+  stickyBar.classList.toggle('on', window.scrollY > 660 && !open);
+}
+window.addEventListener('scroll', syncSticky, {passive:true});
+
+/* ---------- exit-intent offer ---------- */
+let exitDone = false;
+function maybeExit(){
+  if(exitDone) return;
+  if(document.getElementById('overlay').classList.contains('on')) return;
+  try{ if(sessionStorage.getItem('kindred-exit')) return; sessionStorage.setItem('kindred-exit','1'); }catch(e){}
+  exitDone = true;
+  document.getElementById('overlay').classList.add('on');
+  document.body.style.overflow='hidden';
+  stickyBar.classList.remove('on');
+  M.innerHTML = `
+    <div class="mhead"><button class="close" onclick="closeFlow()">×</button>
+      <h3>Before you go</h3><p>Whatever brought you here is still there tomorrow.</p></div>
+    <div class="mbody">
+      <div class="notice" style="border-style:solid;text-align:center">
+        <strong style="font-size:15px;color:var(--text)">$5 off your first conversation</strong><br>
+        Use code <strong style="color:var(--accent);letter-spacing:.08em">FIRSTTALK</strong> — 30 minutes for $14.
+      </div>
+      <p class="muted" style="font-size:13.5px;margin-bottom:18px">
+        If it doesn't help, we refund it. So the worst case is half an hour of your evening and nothing on your card.
+      </p>
+      <button class="btn btn-primary btn-block" onclick="takeOffer()">Use the code and start</button>
+      <button class="link-btn" style="display:block;margin:14px auto 0" onclick="closeFlow()">No thanks, not right now</button>
+    </div>`;
+}
+function takeOffer(){ S.promo='FIRSTTALK'; openFlow('signup'); }
+document.addEventListener('mouseout', e=>{ if(!e.relatedTarget && e.clientY <= 0) maybeExit(); });
+window.addEventListener('scroll', ()=>{
+  const d = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+  if(d > 0.92) maybeExit();
+}, {passive:true});
+
+/* ---------- returning from Stripe ---------- */
+(async function(){
+  const q = new URLSearchParams(location.search);
+  const sid = q.get('session_id');
+  if(q.get('checkout') === 'cancelled'){ history.replaceState({}, '', location.pathname); return; }
+  if(!sid) return;
+  history.replaceState({}, '', location.pathname);
+  try{
+    const r = await fetch(API+'/api/session?id='+encodeURIComponent(sid));
+    const d = await r.json();
+    if(!d.paid) return;
+    S.name = d.name || ''; S.email = d.email || '';
+    S.gift = !!d.gift; S.recipient = d.recipient || ''; S.listener = d.listener || null;
+  }catch(e){ return; }
+  try{ sessionStorage.setItem('kindred-exit','1'); }catch(e){}
+  S.mode = 'signup'; S.step = 5;
+  document.getElementById('overlay').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  draw();
+})();
+
+/* keep the sticky bar out of the way while a modal is open */
+const _open = openFlow, _close = closeFlow;
+openFlow = function(){ _open.apply(null, arguments); stickyBar.classList.remove('on'); };
+closeFlow = function(){ _close(); syncSticky(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+[Unit]
+Description=Kindred landing page + checkout
+After=network.target
+
+[Service]
+Type=simple
+User=kindred
+Group=kindred
+WorkingDirectory=/var/www/kindred
+EnvironmentFile=/var/www/kindred/.env
+ExecStart=/usr/bin/node /var/www/kindred/server.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/kindred/data
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+# Copy to deploy/deploy.conf and fill in. That file is gitignored —
+# it holds your server address and must never be committed.
+
+VPS_HOST="187.77.77.62"        # the VPS IP, or the domain once DNS resolves
+VPS_USER="root"
+VPS_PORT="22"
+VPS_PATH="/var/www/kindred"    # must match WorkingDirectory in kindred.service
+
+# The public hostname Kindred will be served on. Its DNS A record must already
+# point at VPS_HOST, or Caddy cannot get a certificate.
+# This is NOT markislevit.online — that domain is the SRM site on the same box.
+DOMAIN="kindred.example.com"
+
+# Email Let's Encrypt uses for expiry warnings.
+ACME_EMAIL="you@example.com"

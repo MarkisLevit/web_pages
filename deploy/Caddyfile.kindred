@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------------------
+# Kindred — Caddy site configuration
+#
+# Installed by deploy/deploy.sh to /etc/caddy/conf.d/kindred.caddy, with
+# __DOMAIN__ replaced by the real host. It is a SEPARATE file on purpose:
+# this box already serves markislevit.online from /etc/caddy/Caddyfile, and
+# that file is never rewritten by this deploy.
+#
+# TLS is issued and renewed by Caddy automatically — no certbot, no cron.
+#
+# Security headers (CSP, HSTS, nosniff, …) are set by helmet inside server.js
+# and deliberately NOT repeated here: two sources for the same header means
+# two policies to keep in sync, and a stale CSP here would silently override
+# the one the application actually needs.
+# ---------------------------------------------------------------------------
+
+www.__DOMAIN__ {
+	redir https://__DOMAIN__{uri} permanent
+}
+
+__DOMAIN__ {
+	encode zstd gzip
+
+	header -Server
+
+	# Everything, including the static page, is served by Node: express.static
+	# owns /public and the API shares the origin, so the front end can call
+	# /api/* with no CORS and no second hostname.
+	#
+	# The Stripe webhook at /api/webhook needs the request body byte-for-byte
+	# to verify its signature. reverse_proxy streams the body unmodified, and
+	# `encode` above only touches responses, so the signature stays valid.
+	reverse_proxy 127.0.0.1:3000 {
+		header_up X-Real-IP {remote_host}
+	}
+}
