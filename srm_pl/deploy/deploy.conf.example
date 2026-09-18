@@ -1,0 +1,7 @@
+# Copy to deploy/deploy.conf and fill in. That file is gitignored —
+# it holds your server address and must never be committed.
+
+VPS_HOST="123.45.67.89"     # your Hostinger VPS IP, or the domain once DNS resolves
+VPS_USER="root"             # Hostinger VPS gives you root by default
+VPS_PORT="22"               # change if you moved SSH off 22
+VPS_PATH="/var/www/srm"     # must match SITE_ROOT in server-setup.sh
